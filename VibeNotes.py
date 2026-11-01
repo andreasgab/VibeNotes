@@ -72,6 +72,7 @@ def init_json():
                 "is_expiring": False,
                 "created_at": datetime.utcnow().isoformat(),
                 "tasks": {},
+                "task_order": [],
             }
         },
         "next_page_id": 2,
@@ -211,9 +212,19 @@ TEMPLATE = """
                     </div>
                 </div>
 
+                {% set task_order = current_page.get('task_order', []) %}
+                {% set tasks = current_page.get('tasks', {}) %}
+                
+                {# Build ordered list of todo tasks #}
                 {% set todo_tasks = [] %}
-                {% for tid, t in current_page.tasks.items() %}
-                    {% if t.status == 'todo' %}
+                {% for tid in task_order %}
+                    {% if tid in tasks and tasks[tid].status == 'todo' %}
+                        {% set _ = todo_tasks.append((tid, tasks[tid])) %}
+                    {% endif %}
+                {% endfor %}
+                {# Catch any tasks missing from task_order #}
+                {% for tid, t in tasks.items() %}
+                    {% if t.status == 'todo' and tid not in task_order %}
                         {% set _ = todo_tasks.append((tid, t)) %}
                     {% endif %}
                 {% endfor %}
@@ -224,9 +235,16 @@ TEMPLATE = """
                         <input type="checkbox" onchange="markDone('{{ current_page_id }}', '{{ tid }}')" class="w-5 h-5 accent-blue-500 cursor-pointer">
                         <input type="text" value="{{ task.text }}" onblur="updateTask('{{ current_page_id }}', '{{ tid }}', this.value)" class="bg-transparent border-none text-white w-full focus:outline-none focus:ring-1 focus:ring-blue-500 rounded px-1">
                     </div>
-                    <div class="flex items-center gap-3">
+                    <div class="flex items-center gap-2">
                         <span class="text-xs text-gray-400 font-mono bg-gray-800 px-2 py-1 rounded" title="Days in To-Do">{{ task.todo_days }}d</span>
-                        <button onclick="deleteTask('{{ current_page_id }}', '{{ tid }}')" class="text-gray-500 hover:text-red-400 text-sm"><i class="fa-solid fa-xmark"></i></button>
+                        
+                        <!-- Reorder Buttons -->
+                        <div class="flex flex-col gap-0.5">
+                            <button onclick="moveTask('{{ current_page_id }}', '{{ tid }}', 'up')" class="text-gray-500 hover:text-white text-[10px] px-1 bg-gray-900 rounded" title="Move Up"><i class="fa-solid fa-chevron-up"></i></button>
+                            <button onclick="moveTask('{{ current_page_id }}', '{{ tid }}', 'down')" class="text-gray-500 hover:text-white text-[10px] px-1 bg-gray-900 rounded" title="Move Down"><i class="fa-solid fa-chevron-down"></i></button>
+                        </div>
+
+                        <button onclick="deleteTask('{{ current_page_id }}', '{{ tid }}')" class="text-gray-500 hover:text-red-400 text-sm ml-1"><i class="fa-solid fa-xmark"></i></button>
                     </div>
                 </div>
                 {% endfor %}
@@ -238,7 +256,7 @@ TEMPLATE = """
             <h2 class="text-xs font-semibold uppercase tracking-wider text-gray-400 mb-3">Done (Most Recent)</h2>
             <div class="space-y-2" id="done-container">
                 {% set done_tasks = [] %}
-                {% for tid, t in current_page.tasks.items() %}
+                {% for tid, t in tasks.items() %}
                     {% if t.status == 'done' %}
                         {% set _ = done_tasks.append((tid, t)) %}
                     {% endif %}
@@ -375,6 +393,13 @@ TEMPLATE = """
         function deleteTask(pageId, taskId) {
             fetch(`/page/${pageId}/task/${taskId}/delete`, {method: 'POST'}).then(() => location.reload());
         }
+        function moveTask(pageId, taskId, direction) {
+            fetch(`/page/${pageId}/task/${taskId}/move`, {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({direction: direction})
+            }).then(() => location.reload());
+        }
     </script>
 </body>
 </html>
@@ -394,6 +419,7 @@ def index():
         "is_expiring": False,
         "created_at": datetime.utcnow().isoformat(),
         "tasks": {},
+        "task_order": [],
     }
     data["pages"] = pages
     data["next_page_id"] = 2
@@ -410,6 +436,10 @@ def index():
   changed = False
 
   for pid, p in pages.items():
+    if "task_order" not in p:
+      p["task_order"] = list(p.get("tasks", {}).keys())
+      changed = True
+
     for tid, t in list(p.get("tasks", {}).items()):
       if t["status"] == "todo":
         last_active = datetime.fromisoformat(t["last_active_date"])
@@ -421,6 +451,8 @@ def index():
         completed = datetime.fromisoformat(t["completed_at"])
         if (now - completed).days >= 30:
           del p["tasks"][tid]
+          if tid in p["task_order"]:
+            p["task_order"].remove(tid)
           changed = True
 
   if changed:
@@ -451,18 +483,25 @@ def export_pdf(page_id):
   lines.append("=" * 40)
   lines.append("\n[ TO-DO LIST ]")
 
-  todo_items = [
-      t for t in page["tasks"].values() if t["status"] == "todo"
+  task_order = page.get("task_order", [])
+  tasks = page.get("tasks", {})
+  ordered_todos = [
+      tasks[tid]
+      for tid in task_order
+      if tid in tasks and tasks[tid]["status"] == "todo"
   ]
-  if not todo_items:
+  # Add any missing
+  for tid, t in tasks.items():
+    if t["status"] == "todo" and tid not in task_order:
+      ordered_todos.append(t)
+
+  if not ordered_todos:
     lines.append("  (No active tasks)")
-  for t in todo_items:
+  for t in ordered_todos:
     lines.append(f"  [ ] {t['text']}  ({t['todo_days']} days)")
 
   lines.append("\n[ DONE LIST ]")
-  done_items = [
-      t for t in page["tasks"].values() if t["status"] == "done"
-  ]
+  done_items = [t for t in tasks.values() if t["status"] == "done"]
   done_items.sort(key=lambda x: x.get("completed_at", ""), reverse=True)
   if not done_items:
     lines.append("  (No completed tasks)")
@@ -500,6 +539,7 @@ def create_page():
       "is_expiring": is_expiring,
       "created_at": datetime.utcnow().isoformat(),
       "tasks": {},
+      "task_order": [],
   }
   save_data(data)
   return jsonify({"success": True, "id": new_id})
@@ -534,6 +574,7 @@ def duplicate_page(id):
         "is_expiring": orig["is_expiring"],
         "created_at": datetime.utcnow().isoformat(),
         "tasks": duplicated_tasks,
+        "task_order": list(orig.get("task_order", [])),
     }
     save_data(data)
   return jsonify({"success": True})
@@ -576,6 +617,9 @@ def add_task(page_id):
           "completed_at": None,
           "last_active_date": datetime.utcnow().isoformat(),
       }
+      if "task_order" not in data["pages"][page_id]:
+        data["pages"][page_id]["task_order"] = []
+      data["pages"][page_id]["task_order"].append(tid)
       save_data(data)
   return jsonify({"success": True})
 
@@ -600,6 +644,10 @@ def mark_todo(page_id, tid):
     t["todo_days"] = 0
     t["completed_at"] = None
     t["last_active_date"] = datetime.utcnow().isoformat()
+    if "task_order" not in data["pages"][page_id]:
+      data["pages"][page_id]["task_order"] = []
+    if tid not in data["pages"][page_id]["task_order"]:
+      data["pages"][page_id]["task_order"].append(tid)
     save_data(data)
   return jsonify({"success": True})
 
@@ -620,7 +668,30 @@ def delete_task(page_id, tid):
   data = load_data()
   if page_id in data["pages"] and tid in data["pages"][page_id]["tasks"]:
     del data["pages"][page_id]["tasks"][tid]
+    if tid in data["pages"][page_id].get("task_order", []):
+      data["pages"][page_id]["task_order"].remove(tid)
     save_data(data)
+  return jsonify({"success": True})
+
+
+@app.route("/page/<page_id>/task/<tid>/move", methods=["POST"])
+def move_task(page_id, tid):
+  data = load_data()
+  if page_id in data["pages"]:
+    page = data["pages"][page_id]
+    if "task_order" not in page:
+      page["task_order"] = list(page.get("tasks", {}).keys())
+
+    order = page["task_order"]
+    if tid in order:
+      idx = order.index(tid)
+      direction = request.json.get("direction")
+      if direction == "up" and idx > 0:
+        order[idx], order[idx - 1] = order[idx - 1], order[idx]
+        save_data(data)
+      elif direction == "down" and idx < len(order) - 1:
+        order[idx], order[idx + 1] = order[idx + 1], order[idx]
+        save_data(data)
   return jsonify({"success": True})
 
 
