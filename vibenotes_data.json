@@ -1,0 +1,65 @@
+{
+    "pages": {
+        "1": {
+            "id": 1,
+            "name": "My First List",
+            "is_expiring": false,
+            "created_at": "2026-11-01T14:42:15.317741",
+            "tasks": {
+                "1": {
+                    "text": "elo",
+                    "status": "done",
+                    "todo_days": 0,
+                    "completed_at": "2026-11-01T14:44:32.214882",
+                    "last_active_date": "2026-11-01T14:44:22.050796"
+                },
+                "3": {
+                    "text": "hello",
+                    "status": "done",
+                    "todo_days": 0,
+                    "completed_at": "2026-11-01T14:44:33.804286",
+                    "last_active_date": "2026-11-01T14:44:29.618338"
+                },
+                "4": {
+                    "text": "hello",
+                    "status": "done",
+                    "todo_days": 0,
+                    "completed_at": "2026-11-01T14:44:34.895283",
+                    "last_active_date": "2026-11-01T14:44:30.961340"
+                }
+            }
+        },
+        "2": {
+            "id": 2,
+            "name": "New List",
+            "is_expiring": false,
+            "created_at": "2026-11-01T14:44:44.613340",
+            "tasks": {
+                "5": {
+                    "text": "f",
+                    "status": "todo",
+                    "todo_days": 0,
+                    "completed_at": null,
+                    "last_active_date": "2026-11-01T14:44:51.145167"
+                }
+            }
+        },
+        "3": {
+            "id": 3,
+            "name": "New List",
+            "is_expiring": true,
+            "created_at": "2026-11-01T14:44:47.609880",
+            "tasks": {
+                "6": {
+                    "text": "ht",
+                    "status": "done",
+                    "todo_days": 0,
+                    "completed_at": "2026-11-01T14:44:56.966339",
+                    "last_active_date": "2026-11-01T14:44:55.685338"
+                }
+            }
+        }
+    },
+    "next_page_id": 5,
+    "next_task_id": 7
+}
