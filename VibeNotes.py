@@ -3,8 +3,10 @@ import json
 import os
 import subprocess
 import sys
+import threading
 from flask import (
     Flask,
+    Response,
     jsonify,
     redirect,
     render_template_string,
@@ -18,23 +20,21 @@ app.secret_key = "vibenotes_secret_key"
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 FILE_PATH = os.path.join(BASE_DIR, "vibenotes_data.json")
 
+# Debounced git push variables
+_git_timer = None
 
-def auto_push_to_github():
+
+def delayed_git_push():
+  global _git_timer
   try:
     commit_message = f"Auto-update VibeNotes data at {datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S')}"
-
-    # 1. Stage the file
     subprocess.run(["git", "add", FILE_PATH], cwd=BASE_DIR, check=True)
-
-    # 2. Check if there are actual changes to commit
     status = subprocess.run(
         ["git", "status", "--porcelain"],
         cwd=BASE_DIR,
         capture_output=True,
         text=True,
     )
-
-    # If vibenotes_data.json actually changed, commit and push
     if status.stdout.strip():
       subprocess.run(
           ["git", "commit", "-m", commit_message], cwd=BASE_DIR, check=True
@@ -42,18 +42,24 @@ def auto_push_to_github():
       subprocess.run(
           ["git", "push", "origin", "main"], cwd=BASE_DIR, check=True
       )
-      print(
-          f"Successfully pushed VibeNotes updates to GitHub",
-          file=sys.stderr,
-      )
+      print(f"Successfully pushed VibeNotes updates to GitHub", file=sys.stderr)
     else:
       print(
           "No changes detected in vibenotes_data.json; skipping push.",
           file=sys.stderr,
       )
-
   except Exception as e:
     print(f"Git push failed: {e}", file=sys.stderr)
+  finally:
+    _git_timer = None
+
+
+def auto_push_to_github():
+  global _git_timer
+  if _git_timer is not None:
+    _git_timer.cancel()
+  _git_timer = threading.Timer(30.0, delayed_git_push)
+  _git_timer.start()
 
 
 def init_json():
@@ -99,7 +105,6 @@ def get_page_remaining_days(page):
   return max(0, left)
 
 
-# Register Jinja helper filters correctly
 @app.template_filter("helper_remaining")
 def helper_remaining(page):
   return get_page_remaining_days(page)
@@ -143,8 +148,8 @@ TEMPLATE = """
                 <div class="relative flex items-center px-4 py-2 rounded-lg whitespace-nowrap {{ 'tab-active' if current_page_id == pid else 'tab-inactive' }}">
                     <a href="{{ url_for('index', page_id=pid) }}" class="text-sm font-medium mr-1">{{ title }}</a>
                     
-                    <!-- Page Settings Dropdown Trigger (^) -->
-                    <button onclick="toggleMenu(event, '{{ pid }}')" class="text-gray-400 hover:text-white px-1.5 py-0.5 text-xs font-mono font-bold rounded hover:bg-gray-700/50" title="Page Settings">^</button>
+                    <!-- Page Settings Dropdown Trigger (⌄) -->
+                    <button onclick="toggleMenu(event, '{{ pid }}')" class="text-gray-400 hover:text-white px-1.5 py-0.5 text-xs font-mono font-bold rounded hover:bg-gray-700/50" title="Page Settings">⌄</button>
 
                     <!-- Dropdown Menu -->
                     <div id="menu-{{ pid }}" class="hidden absolute top-full left-0 mt-1 bg-[#242424] border border-gray-700 rounded-lg shadow-2xl py-1.5 z-[9999] text-xs min-w-[140px]">
@@ -195,7 +200,7 @@ TEMPLATE = """
             <h2 class="text-xs font-semibold uppercase tracking-wider text-gray-400 mb-3">To-Do</h2>
             <div class="space-y-2" id="todo-list">
                 
-                <!-- Google Keep Style Quick-Add Row (Always on top) -->
+                <!-- Google Keep Style Quick-Add Row -->
                 <div class="task-card flex items-center justify-between p-3 rounded-lg border border-blue-500/50 bg-[#252525]">
                     <div class="flex items-center gap-3 flex-1 mr-3">
                         <span class="w-5 h-5 flex items-center justify-center text-blue-400 text-sm"><i class="fa-solid fa-plus"></i></span>
@@ -229,7 +234,7 @@ TEMPLATE = """
         </section>
 
         <!-- Done List Section -->
-        <section>
+        <section class="mb-6">
             <h2 class="text-xs font-semibold uppercase tracking-wider text-gray-400 mb-3">Done (Most Recent)</h2>
             <div class="space-y-2" id="done-container">
                 {% set done_tasks = [] %}
@@ -269,6 +274,13 @@ TEMPLATE = """
                 {% endif %}
             </div>
         </section>
+
+        <!-- Export PDF Button -->
+        <div class="mt-8 pt-4 border-t border-gray-800 text-center">
+            <a href="{{ url_for('export_pdf', page_id=current_page_id) }}" class="inline-flex items-center gap-2 bg-[#252525] hover:bg-[#303030] text-gray-300 hover:text-white px-4 py-2.5 rounded-lg text-sm font-medium border border-gray-700 shadow transition">
+                <i class="fa-solid fa-file-pdf text-red-400"></i> Export Current Page to PDF
+            </a>
+        </div>
     </main>
     {% endif %}
 
@@ -339,6 +351,7 @@ TEMPLATE = """
         function quickAddTask(pageId, inputElem) {
             let text = inputElem.value.trim();
             if (text.length > 0) {
+                inputElem.value = ""; 
                 fetch(`/page/${pageId}/task/add`, {
                     method: 'POST',
                     headers: {'Content-Type': 'application/json'},
@@ -393,7 +406,6 @@ def index():
   show_all = request.args.get("show_all", 0, type=int)
   current_page = pages[page_id]
 
-  # Background cleanup & day counters update logic
   now = datetime.utcnow()
   changed = False
 
@@ -420,6 +432,55 @@ def index():
       current_page_id=page_id,
       current_page=current_page,
       show_all=show_all,
+  )
+
+
+@app.route("/page/<page_id>/export_pdf")
+def export_pdf(page_id):
+  data = load_data()
+  pages = data.get("pages", {})
+  if page_id not in pages:
+    return redirect(url_for("index"))
+
+  page = pages[page_id]
+  lines = []
+  lines.append(f"VibeNotes Export: {page['name']}")
+  lines.append(
+      f"Type: {'Expiring (7 days)' if page['is_expiring'] else 'Permanent'}"
+  )
+  lines.append("=" * 40)
+  lines.append("\n[ TO-DO LIST ]")
+
+  todo_items = [
+      t for t in page["tasks"].values() if t["status"] == "todo"
+  ]
+  if not todo_items:
+    lines.append("  (No active tasks)")
+  for t in todo_items:
+    lines.append(f"  [ ] {t['text']}  ({t['todo_days']} days)")
+
+  lines.append("\n[ DONE LIST ]")
+  done_items = [
+      t for t in page["tasks"].values() if t["status"] == "done"
+  ]
+  done_items.sort(key=lambda x: x.get("completed_at", ""), reverse=True)
+  if not done_items:
+    lines.append("  (No completed tasks)")
+  for t in done_items:
+    c_date = (
+        datetime.fromisoformat(t["completed_at"]).strftime("%d/%m/%Y")
+        if t.get("completed_at")
+        else ""
+    )
+    lines.append(f"  [x] {t['text']}  (Completed: {c_date})")
+
+  report_content = "\n".join(lines)
+  filename = f"{page['name'].replace(' ', '_')}_export.txt"
+
+  return Response(
+      report_content,
+      mimetype="text/plain",
+      headers={"Content-Disposition": f"attachment; filename={filename}"},
   )
 
 
