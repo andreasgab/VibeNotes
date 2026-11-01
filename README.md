@@ -32,4 +32,4 @@
 
 ## Hosting on PythonAnywhere
 
-This app is configured to run natively on PythonAnywhere and automatically push state updates back to GitHub:
+This app is configured to run natively on PythonAnywhere and automatically push state updates back to GitHub
