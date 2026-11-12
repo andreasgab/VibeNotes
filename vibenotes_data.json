@@ -2,7 +2,7 @@
     "pages": {
         "1": {
             "id": 1,
-            "name": "My First List",
+            "name": "VF",
             "is_expiring": false,
             "created_at": "2026-11-01T14:42:15.317741",
             "tasks": {
@@ -11,7 +11,7 @@
                     "status": "todo",
                     "todo_days": 1,
                     "completed_at": null,
-                    "last_active_date": "2026-11-12T19:54:05.847031"
+                    "last_active_date": "2026-11-12T21:11:44.828008"
                 },
                 "7": {
                     "text": "ggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg",
@@ -67,7 +67,7 @@
                     "status": "chapter",
                     "todo_days": 0,
                     "completed_at": null,
-                    "last_active_date": "2026-11-12T21:09:26.704565"
+                    "last_active_date": "2026-11-12T21:11:48.524831"
                 },
                 "18": {
                     "text": "send email to Eleni Alexandra",
