@@ -140,13 +140,19 @@ TEMPLATE = """
 </head>
 <body class="min-h-screen flex flex-col">
 
-    <!-- Header / Tab Bar -->
-    <header class="bg-[#181818] border-b border-gray-800 px-2 py-2 sticky top-0 z-50">
+    <!-- Header / Navbar -->
+    <header class="bg-[#181818] border-b border-gray-800 px-3 py-2.5 sticky top-0 z-50 flex items-center justify-between flex-wrap gap-2">
+        <!-- Logo -->
+        <div class="flex items-center gap-2">
+            <span class="text-blue-500 font-black tracking-wider text-base uppercase bg-blue-500/10 px-2.5 py-1 rounded-lg border border-blue-500/20">VibeNotes</span>
+        </div>
+
+        <!-- Tab Bar -->
         <div class="flex items-center space-x-1 flex-wrap gap-y-2">
             {% for pid, p in pages.items() %}
                 {% set rem = p | helper_remaining %}
                 {% set title = (p.name ~ " (" ~ rem ~ ")") if p.is_expiring else p.name %}
-                <div class="relative flex items-center px-4 py-2 rounded-lg whitespace-nowrap {{ 'tab-active' if current_page_id == pid else 'tab-inactive' }}">
+                <div class="relative flex items-center px-3 py-1.5 rounded-lg whitespace-nowrap {{ 'tab-active' if current_page_id == pid else 'tab-inactive' }}">
                     <a href="{{ url_for('index', page_id=pid) }}" class="text-sm font-medium mr-1">{{ title }}</a>
                     
                     <!-- Page Settings Dropdown Trigger (⌄) -->
@@ -164,7 +170,7 @@ TEMPLATE = """
                     </div>
                 </div>
             {% endfor %}
-            <button onclick="openCreateModal()" class="px-3 py-2 text-blue-400 hover:bg-gray-800 rounded-lg text-lg font-bold" title="Add Page">+</button>
+            <button onclick="openCreateModal()" class="px-2.5 py-1.5 text-blue-400 hover:bg-gray-800 rounded-lg text-base font-bold" title="Add Page">+</button>
         </div>
     </header>
 
@@ -196,63 +202,88 @@ TEMPLATE = """
             </h1>
         </div>
 
-        <!-- To-Do List Section -->
-        <section class="mb-8">
-            <h2 class="text-xs font-semibold uppercase tracking-wider text-gray-400 mb-3">To-Do</h2>
-            <div class="space-y-2" id="todo-list">
-                
-                <!-- Google Keep Style Quick-Add Row -->
-                <div class="task-card flex items-center justify-between p-3 rounded-lg border border-blue-500/50 bg-[#252525]">
-                    <div class="flex items-center gap-3 flex-1 mr-3">
-                        <span class="w-5 h-5 flex items-center justify-center text-blue-400 text-sm"><i class="fa-solid fa-plus"></i></span>
-                        <input type="text" id="quick-add-input" placeholder="New task..." 
-                               onblur="quickAddTask('{{ current_page_id }}', this)" 
-                               onkeydown="if(event.key === 'Enter') { this.blur(); }"
-                               class="bg-transparent border-none text-white w-full focus:outline-none placeholder-gray-500">
-                    </div>
-                </div>
+        {% set task_order = current_page.get('task_order', []) %}
+        {% set tasks = current_page.get('tasks', {}) %}
 
-                {% set task_order = current_page.get('task_order', []) %}
-                {% set tasks = current_page.get('tasks', {}) %}
-                
-                {# Build ordered list of todo tasks #}
-                {% set todo_tasks = [] %}
-                {% for tid in task_order %}
-                    {% if tid in tasks and tasks[tid].status == 'todo' %}
-                        {% set _ = todo_tasks.append((tid, tasks[tid])) %}
-                    {% endif %}
-                {% endfor %}
-                {# Catch any tasks missing from task_order #}
-                {% for tid, t in tasks.items() %}
-                    {% if t.status == 'todo' and tid not in task_order %}
-                        {% set _ = todo_tasks.append((tid, t)) %}
-                    {% endif %}
-                {% endfor %}
+        {% set sections = [
+            ('To-Do', 'todo'),
+            ('Business Performance', 'bp'),
+            ('Chapter', 'chapter'),
+            ('Misc', 'misc')
+        ] %}
 
-                {% for tid, task in todo_tasks %}
-                <div class="task-card flex items-center justify-between p-3 rounded-lg border border-gray-800" data-id="{{ tid }}">
-                    <div class="flex items-center gap-3 flex-1 mr-3">
-                        <input type="checkbox" onchange="markDone('{{ current_page_id }}', '{{ tid }}')" class="w-5 h-5 accent-blue-500 cursor-pointer">
-                        <input type="text" value="{{ task.text }}" onblur="updateTask('{{ current_page_id }}', '{{ tid }}', this.value)" class="bg-transparent border-none text-white w-full focus:outline-none focus:ring-1 focus:ring-blue-500 rounded px-1">
-                    </div>
+        <!-- Active Sections Container -->
+        <div id="active-sections-container">
+            {% for sec_title, sec_key in sections %}
+            <!-- Section: {{ sec_title }} -->
+            <section class="mb-8 section-block" id="block-{{ sec_key }}" data-key="{{ sec_key }}">
+                <div class="flex justify-between items-center mb-3">
                     <div class="flex items-center gap-2">
-                        <span class="text-xs text-gray-400 font-mono bg-gray-800 px-2 py-1 rounded" title="Days in To-Do">{{ task.todo_days }}d</span>
-                        
-                        <!-- Reorder Buttons -->
-                        <div class="flex flex-col gap-0.5">
-                            <button onclick="moveTask('{{ current_page_id }}', '{{ tid }}', 'up')" class="text-gray-500 hover:text-white text-[10px] px-1 bg-gray-900 rounded" title="Move Up"><i class="fa-solid fa-chevron-up"></i></button>
-                            <button onclick="moveTask('{{ current_page_id }}', '{{ tid }}', 'down')" class="text-gray-500 hover:text-white text-[10px] px-1 bg-gray-900 rounded" title="Move Down"><i class="fa-solid fa-chevron-down"></i></button>
+                        <h2 class="text-xs font-semibold uppercase tracking-wider text-gray-400 m-0">{{ sec_title }}</h2>
+                        <!-- Section Reorder Buttons -->
+                        <div class="flex gap-0.5">
+                            <button onclick="moveSection('{{ current_page_id }}', '{{ sec_key }}', 'up')" class="text-gray-500 hover:text-white text-[10px] px-1 bg-gray-900 rounded" title="Move Section Up"><i class="fa-solid fa-chevron-up"></i></button>
+                            <button onclick="moveSection('{{ current_page_id }}', '{{ sec_key }}', 'down')" class="text-gray-500 hover:text-white text-[10px] px-1 bg-gray-900 rounded" title="Move Section Down"><i class="fa-solid fa-chevron-down"></i></button>
                         </div>
-
-                        <button onclick="deleteTask('{{ current_page_id }}', '{{ tid }}')" class="text-gray-500 hover:text-red-400 text-sm ml-1"><i class="fa-solid fa-xmark"></i></button>
                     </div>
+                    <label class="flex items-center gap-1.5 text-xs text-gray-400 cursor-pointer select-none bg-[#1e1e1e] px-2 py-0.5 rounded border border-gray-800 hover:border-gray-700">
+                        <input type="checkbox" onchange="toggleHideSection('{{ current_page_id }}', '{{ sec_key }}', this)" class="accent-blue-500 rounded hide-checkbox-{{ sec_key }}">
+                        <span>Hide section</span>
+                    </label>
                 </div>
-                {% endfor %}
-            </div>
-        </section>
+                <div class="space-y-2 section-content-box" id="section-content-{{ sec_key }}">
+                    
+                    <!-- Quick-Add Row (1 Line Height) -->
+                    <div class="task-card flex items-start justify-between p-3 rounded-lg border border-blue-500/50 bg-[#252525]">
+                        <div class="flex items-start gap-3 flex-1 mr-3">
+                            <span class="w-5 h-5 flex items-center justify-center text-blue-400 text-sm mt-1"><i class="fa-solid fa-plus"></i></span>
+                            <textarea id="quick-add-{{ sec_key }}" placeholder="New {{ sec_title | lower }} task... " 
+                                      rows="1"
+                                      onblur="quickAddTask('{{ current_page_id }}', '{{ sec_key }}', this)" 
+                                      onkeydown="if(event.key === 'Enter' && !event.shiftKey) { event.preventDefault(); this.blur(); }"
+                                      class="bg-transparent border-none text-white w-full focus:outline-none placeholder-gray-500 resize-y min-h-[44px]"></textarea>
+                        </div>
+                    </div>
+
+                    {% set sec_tasks = [] %}
+                    {% for tid in task_order %}
+                        {% if tid in tasks and tasks[tid].status == sec_key %}
+                            {% set _ = sec_tasks.append((tid, tasks[tid])) %}
+                        {% endif %}
+                    {% endfor %}
+                    {% for tid, t in tasks.items() %}
+                        {% if t.status == sec_key and tid not in task_order %}
+                            {% set _ = sec_tasks.append((tid, t)) %}
+                        {% endif %}
+                    {% endfor %}
+
+                    {% for tid, task in sec_tasks %}
+                    <div class="task-card flex items-start justify-between p-3 rounded-lg border border-gray-800" data-id="{{ tid }}">
+                        <div class="flex items-start gap-3 flex-1 mr-3">
+                            <input type="checkbox" onchange="markDone('{{ current_page_id }}', '{{ tid }}')" class="w-5 h-5 accent-blue-500 cursor-pointer mt-1" title="Mark as Done">
+                            <textarea onblur="updateTask('{{ current_page_id }}', '{{ tid }}', this.value)" rows="1" class="bg-transparent border-none text-white w-full focus:outline-none focus:ring-1 focus:ring-blue-500 rounded px-1 resize-y min-h-[38px]">{{ task.text }}</textarea>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="text-xs text-gray-400 font-mono bg-gray-800 px-2 py-1 rounded" title="Days in Task">{{ task.todo_days }}d</span>
+                            
+                            <!-- Reorder & Push to Top Buttons -->
+                            <div class="flex flex-col gap-0.5">
+                                <button onclick="pushToTop('{{ current_page_id }}', '{{ tid }}')" class="text-blue-400 hover:text-white text-[10px] px-1 bg-gray-900 rounded" title="Push to Top"><i class="fa-solid fa-angles-up"></i></button>
+                                <button onclick="moveTask('{{ current_page_id }}', '{{ tid }}', 'up')" class="text-gray-500 hover:text-white text-[10px] px-1 bg-gray-900 rounded" title="Move Up"><i class="fa-solid fa-chevron-up"></i></button>
+                                <button onclick="moveTask('{{ current_page_id }}', '{{ tid }}', 'down')" class="text-gray-500 hover:text-white text-[10px] px-1 bg-gray-900 rounded" title="Move Down"><i class="fa-solid fa-chevron-down"></i></button>
+                            </div>
+
+                            <button onclick="deleteTask('{{ current_page_id }}', '{{ tid }}')" class="text-gray-500 hover:text-red-400 text-sm ml-1" title="Delete"><i class="fa-solid fa-xmark"></i></button>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </section>
+            {% endfor %}
+        </div>
 
         <!-- Done List Section -->
-        <section class="mb-6">
+        <section class="mb-6" id="done-section-block">
             <h2 class="text-xs font-semibold uppercase tracking-wider text-gray-400 mb-3">Done (Most Recent)</h2>
             <div class="space-y-2" id="done-container">
                 {% set done_tasks = [] %}
@@ -292,6 +323,9 @@ TEMPLATE = """
                 {% endif %}
             </div>
         </section>
+
+        <!-- Hidden Sections Container (Appears below Done) -->
+        <div id="hidden-sections-container" class="space-y-4"></div>
 
         <!-- Export PDF Button -->
         <div class="mt-8 pt-4 border-t border-gray-800 text-center">
@@ -366,14 +400,14 @@ TEMPLATE = """
                 fetch(`/page/${id}/delete`, {method: 'POST'}).then(() => location.reload());
             }
         }
-        function quickAddTask(pageId, inputElem) {
+        function quickAddTask(pageId, sectionKey, inputElem) {
             let text = inputElem.value.trim();
             if (text.length > 0) {
                 inputElem.value = ""; 
                 fetch(`/page/${pageId}/task/add`, {
                     method: 'POST',
                     headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify({text: text})
+                    body: JSON.stringify({text: text, section: sectionKey})
                 }).then(() => location.reload());
             }
         }
@@ -400,6 +434,119 @@ TEMPLATE = """
                 body: JSON.stringify({direction: direction})
             }).then(() => location.reload());
         }
+        function pushToTop(pageId, taskId) {
+            fetch(`/page/${pageId}/task/${taskId}/push-top`, {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'}
+            }).then(() => location.reload());
+        }
+
+        // Section Order & Hide / Move Logic
+        function getOrderStorageKey(pageId) {
+            return 'vibenotes_section_order_' + pageId;
+        }
+
+        function getHideStorageKey(pageId) {
+            return 'vibenotes_hidden_sections_' + pageId;
+        }
+
+        function getDefaultSectionKeys() {
+            return ['todo', 'bp', 'chapter', 'misc'];
+        }
+
+        function loadSectionOrder(pageId) {
+            try {
+                let stored = localStorage.getItem(getOrderStorageKey(pageId));
+                let keys = stored ? JSON.parse(stored) : getDefaultSectionKeys();
+                let defaults = getDefaultSectionKeys();
+                // Ensure all current keys are present if updated in code
+                defaults.forEach(k => { if (!keys.includes(k)) keys.push(k); });
+                return keys.filter(k => defaults.includes(k));
+            } catch(e) {
+                return getDefaultSectionKeys();
+            }
+        }
+
+        function saveSectionOrder(pageId, orderArr) {
+            localStorage.setItem(getOrderStorageKey(pageId), JSON.stringify(orderArr));
+        }
+
+        function loadHiddenSections(pageId) {
+            try {
+                let stored = localStorage.getItem(getHideStorageKey(pageId));
+                return stored ? JSON.parse(stored) : [];
+            } catch(e) {
+                return [];
+            }
+        }
+
+        function saveHiddenSections(pageId, hiddenArr) {
+            localStorage.setItem(getHideStorageKey(pageId), JSON.stringify(hiddenArr));
+        }
+
+        function applySectionState(pageId) {
+            let order = loadSectionOrder(pageId);
+            let hidden = loadHiddenSections(pageId);
+            let activeContainer = document.getElementById('active-sections-container');
+            let hiddenContainer = document.getElementById('hidden-sections-container');
+
+            // Reorder DOM elements according to stored section order
+            order.forEach(key => {
+                let block = document.getElementById('block-' + key);
+                if (block) {
+                    let checkbox = block.querySelector('input[type="checkbox"]');
+                    let contentBox = block.querySelector('.section-content-box');
+                    
+                    if (hidden.includes(key)) {
+                        if (checkbox) checkbox.checked = true;
+                        if (contentBox) contentBox.classList.add('hidden');
+                        block.classList.add('mb-2');
+                        block.classList.remove('mb-8');
+                        hiddenContainer.appendChild(block);
+                    } else {
+                        if (checkbox) checkbox.checked = false;
+                        if (contentBox) contentBox.classList.remove('hidden');
+                        block.classList.remove('mb-2');
+                        block.classList.add('mb-8');
+                        activeContainer.appendChild(block);
+                    }
+                }
+            });
+        }
+
+        function toggleHideSection(pageId, sectionKey, checkbox) {
+            let hidden = loadHiddenSections(pageId);
+            if (checkbox.checked) {
+                if (!hidden.includes(sectionKey)) hidden.push(sectionKey);
+            } else {
+                hidden = hidden.filter(k => k !== sectionKey);
+            }
+            saveHiddenSections(pageId, hidden);
+            applySectionState(pageId);
+        }
+
+        function moveSection(pageId, sectionKey, direction) {
+            let order = loadSectionOrder(pageId);
+            let idx = order.indexOf(sectionKey);
+            if (idx > -1) {
+                if (direction === 'up' && idx > 0) {
+                    order.splice(idx, 1);
+                    order.splice(idx - 1, 0, sectionKey);
+                } else if (direction === 'down' && idx < order.length - 1) {
+                    order.splice(idx, 1);
+                    order.splice(idx + 1, 0, sectionKey);
+                }
+                saveSectionOrder(pageId, order);
+                applySectionState(pageId);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            let currentPageId = "{{ current_page_id }}";
+            if (currentPageId) {
+                applySectionState(currentPageId);
+            }
+        });
     </script>
 </body>
 </html>
@@ -441,15 +588,17 @@ def index():
       changed = True
 
     for tid, t in list(p.get("tasks", {}).items()):
-      if t["status"] == "todo":
+      # Aging logic for active tasks
+      if t["status"] in ["todo", "bp", "chapter", "misc"]:
         last_active = datetime.fromisoformat(t["last_active_date"])
         if (now - last_active).days >= 1:
           t["todo_days"] += 1
           t["last_active_date"] = now.isoformat()
           changed = True
+      # Cleanup completed tasks after 60 days
       elif t["status"] == "done" and t.get("completed_at"):
         completed = datetime.fromisoformat(t["completed_at"])
-        if (now - completed).days >= 30:
+        if (now - completed).days >= 60:
           del p["tasks"][tid]
           if tid in p["task_order"]:
             p["task_order"].remove(tid)
@@ -481,24 +630,30 @@ def export_pdf(page_id):
       f"Type: {'Expiring (7 days)' if page['is_expiring'] else 'Permanent'}"
   )
   lines.append("=" * 40)
-  lines.append("\n[ TO-DO LIST ]")
 
   task_order = page.get("task_order", [])
   tasks = page.get("tasks", {})
-  ordered_todos = [
-      tasks[tid]
-      for tid in task_order
-      if tid in tasks and tasks[tid]["status"] == "todo"
-  ]
-  # Add any missing
-  for tid, t in tasks.items():
-    if t["status"] == "todo" and tid not in task_order:
-      ordered_todos.append(t)
 
-  if not ordered_todos:
-    lines.append("  (No active tasks)")
-  for t in ordered_todos:
-    lines.append(f"  [ ] {t['text']}  ({t['todo_days']} days)")
+  for sec_name, sec_key in [
+      ("TO-DO", "todo"),
+      ("BUSINESS PERFORMANCE", "bp"),
+      ("CHAPTER", "chapter"),
+      ("MISC", "misc"),
+  ]:
+    lines.append(f"\n[ {sec_name} ]")
+    sec_tasks = [
+        tasks[tid]
+        for tid in task_order
+        if tid in tasks and tasks[tid]["status"] == sec_key
+    ]
+    for tid, t in tasks.items():
+      if t["status"] == sec_key and tid not in task_order:
+        sec_tasks.append(t)
+
+    if not sec_tasks:
+      lines.append("  (No active tasks)")
+    for t in sec_tasks:
+      lines.append(f"  [ ] {t['text']}  ({t['todo_days']} days)")
 
   lines.append("\n[ DONE LIST ]")
   done_items = [t for t in tasks.values() if t["status"] == "done"]
@@ -606,20 +761,21 @@ def add_task(page_id):
   if page_id in data["pages"]:
     req = request.get_json(silent=True) or {}
     text = req.get("text") or request.form.get("text")
+    section = req.get("section", "todo")
     if text:
       tid = str(data.get("next_task_id", 1))
       data["next_task_id"] = int(tid) + 1
 
       data["pages"][page_id]["tasks"][tid] = {
           "text": text,
-          "status": "todo",
+          "status": section,
           "todo_days": 0,
           "completed_at": None,
           "last_active_date": datetime.utcnow().isoformat(),
       }
       if "task_order" not in data["pages"][page_id]:
         data["pages"][page_id]["task_order"] = []
-      data["pages"][page_id]["task_order"].append(tid)
+      data["pages"][page_id]["task_order"].insert(0, tid)
       save_data(data)
   return jsonify({"success": True})
 
@@ -641,13 +797,12 @@ def mark_todo(page_id, tid):
   if page_id in data["pages"] and tid in data["pages"][page_id]["tasks"]:
     t = data["pages"][page_id]["tasks"][tid]
     t["status"] = "todo"
-    t["todo_days"] = 0
     t["completed_at"] = None
     t["last_active_date"] = datetime.utcnow().isoformat()
     if "task_order" not in data["pages"][page_id]:
       data["pages"][page_id]["task_order"] = []
     if tid not in data["pages"][page_id]["task_order"]:
-      data["pages"][page_id]["task_order"].append(tid)
+      data["pages"][page_id]["task_order"].insert(0, tid)
     save_data(data)
   return jsonify({"success": True})
 
@@ -692,6 +847,22 @@ def move_task(page_id, tid):
       elif direction == "down" and idx < len(order) - 1:
         order[idx], order[idx + 1] = order[idx + 1], order[idx]
         save_data(data)
+  return jsonify({"success": True})
+
+
+@app.route("/page/<page_id>/task/<tid>/push-top", methods=["POST"])
+def push_top(page_id, tid):
+  data = load_data()
+  if page_id in data["pages"]:
+    page = data["pages"][page_id]
+    if "task_order" not in page:
+      page["task_order"] = list(page.get("tasks", {}).keys())
+
+    order = page["task_order"]
+    if tid in order:
+      order.remove(tid)
+      order.insert(0, tid)
+      save_data(data)
   return jsonify({"success": True})
 
 
