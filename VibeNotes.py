@@ -136,6 +136,11 @@ TEMPLATE = """
         .tab-active { background-color: #1e1e1e; border-bottom: 2px solid #3b82f6; color: #ffffff; }
         .tab-inactive { background-color: #181818; color: #9ca3af; }
         .task-card { background-color: #1e1e1e; transition: transform 0.2s ease, opacity 0.2s ease; }
+        .section-block + .section-block {
+            border-top: 1px solid rgba(212, 175, 55, 0.65);
+            padding-top: 1rem;
+        }
+        .move-menu { min-width: 150px; }
     </style>
 </head>
 <body class="min-h-screen flex flex-col">
@@ -258,22 +263,56 @@ TEMPLATE = """
                     {% endfor %}
 
                     {% for tid, task in sec_tasks %}
-                    <div class="task-card flex items-start justify-between p-3 rounded-lg border border-gray-800" data-id="{{ tid }}">
+                    <div class="task-card flex items-center justify-between p-3 rounded-lg border border-gray-800" data-id="{{ tid }}">
                         <div class="flex items-start gap-3 flex-1 mr-3">
-                            <input type="checkbox" onchange="markDone('{{ current_page_id }}', '{{ tid }}')" class="w-5 h-5 accent-blue-500 cursor-pointer mt-1" title="Mark as Done">
-                            <textarea onblur="updateTask('{{ current_page_id }}', '{{ tid }}', this.value)" rows="1" class="bg-transparent border-none text-white w-full focus:outline-none focus:ring-1 focus:ring-blue-500 rounded px-1 resize-y min-h-[38px]">{{ task.text }}</textarea>
+                            <div class="relative flex flex-col items-stretch justify-center gap-2 shrink-0 self-center">
+                                <button type="button" onclick="markDone('{{ current_page_id }}', '{{ tid }}')" class="min-w-[42px] px-2 py-1 text-[10px] text-blue-400 hover:text-blue-300 bg-gray-800 hover:bg-gray-700 rounded text-center whitespace-nowrap">Mark Done</button>
+                                <button type="button" onclick="toggleMoveMenu(event, '{{ tid }}')" class="min-w-[42px] px-2 py-1 text-[10px] text-amber-300 hover:text-amber-200 bg-gray-800 hover:bg-gray-700 rounded text-center whitespace-nowrap">Move to</button>
+                                <div id="move-menu-{{ tid }}" class="move-menu hidden absolute left-0 top-full mt-1 bg-[#242424] border border-gray-700 rounded-lg shadow-2xl py-1 z-[100]">
+                                    {% for target_title, target_key in sections %}
+                                        {% if target_key != sec_key %}
+                                        <button type="button" onclick="moveTaskToSection('{{ current_page_id }}', '{{ tid }}', '{{ target_key }}')" class="w-full text-left px-3 py-2 text-xs text-gray-300 hover:bg-gray-700">{{ target_title }}</button>
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            <textarea oninput="autoResizeTask(this)" onblur="updateTask('{{ current_page_id }}', '{{ tid }}', this.value)" rows="1" class="task-textarea bg-transparent border-none text-white w-full focus:outline-none focus:ring-1 focus:ring-blue-500 rounded px-1 resize-none overflow-hidden leading-6" style="height: 24px">{{ task.text }}</textarea>
                         </div>
-                        <div class="flex items-center gap-2">
-                            <span class="text-xs text-gray-400 font-mono bg-gray-800 px-2 py-1 rounded" title="Days in Task">{{ task.todo_days }}d</span>
-                            
-                            <!-- Reorder & Push to Top Buttons -->
-                            <div class="flex flex-col gap-0.5">
-                                <button onclick="pushToTop('{{ current_page_id }}', '{{ tid }}')" class="text-blue-400 hover:text-white text-[10px] px-1 bg-gray-900 rounded" title="Push to Top"><i class="fa-solid fa-angles-up"></i></button>
-                                <button onclick="moveTask('{{ current_page_id }}', '{{ tid }}', 'up')" class="text-gray-500 hover:text-white text-[10px] px-1 bg-gray-900 rounded" title="Move Up"><i class="fa-solid fa-chevron-up"></i></button>
-                                <button onclick="moveTask('{{ current_page_id }}', '{{ tid }}', 'down')" class="text-gray-500 hover:text-white text-[10px] px-1 bg-gray-900 rounded" title="Move Down"><i class="fa-solid fa-chevron-down"></i></button>
+                        <div class="flex items-center gap-3 shrink-0">
+                            <!-- Days counter and delete button stacked to match -->
+                            <div class="flex flex-col items-stretch gap-2">
+                                <span class="min-w-[42px] text-center text-xs text-gray-400 font-mono bg-gray-800 px-2 py-1 rounded" title="Days in Task">{{ task.todo_days }}d</span>
+                                <button type="button" onclick="deleteTask('{{ current_page_id }}', '{{ tid }}')"
+                                        class="min-w-[42px] px-2 py-1 text-xs text-gray-500 hover:text-red-400 bg-gray-800 hover:bg-gray-700 rounded"
+                                        title="Delete" aria-label="Delete">
+                                    <i class="fa-solid fa-xmark"></i>
+                                </button>
                             </div>
 
-                            <button onclick="deleteTask('{{ current_page_id }}', '{{ tid }}')" class="text-gray-500 hover:text-red-400 text-sm ml-1" title="Delete"><i class="fa-solid fa-xmark"></i></button>
+                            <!-- Two-by-two task reorder controls -->
+                            <div class="grid grid-cols-2 gap-2">
+                                <button type="button" onclick="moveTask('{{ current_page_id }}', '{{ tid }}', 'up')"
+                                        class="min-w-[76px] px-2 py-2 text-[10px] text-gray-300 hover:text-white bg-gray-900 hover:bg-gray-700 rounded"
+                                        title="Move Above" aria-label="Move Above">
+                                    <i class="fa-solid fa-chevron-up mr-1"></i>
+                                </button>
+                                <button type="button" onclick="pushToTop('{{ current_page_id }}', '{{ tid }}')"
+                                        class="min-w-[76px] px-2 py-2 text-[10px] text-blue-400 hover:text-white bg-gray-900 hover:bg-gray-700 rounded"
+                                        title="Move to Top" aria-label="Move to Top">
+                                    <i class="fa-solid fa-angles-up mr-1"></i>
+                                </button>
+                                <button type="button" onclick="moveTask('{{ current_page_id }}', '{{ tid }}', 'down')"
+                                        class="min-w-[76px] px-2 py-2 text-[10px] text-gray-300 hover:text-white bg-gray-900 hover:bg-gray-700 rounded"
+                                        title="Move Below" aria-label="Move Below">
+                                    <i class="fa-solid fa-chevron-down mr-1"></i>
+                                </button>
+                                <button type="button" onclick="pushToBottom('{{ current_page_id }}', '{{ tid }}')"
+                                        class="min-w-[76px] px-2 py-2 text-[10px] text-blue-400 hover:text-white bg-gray-900 hover:bg-gray-700 rounded"
+                                        title="Move to Bottom" aria-label="Move to Bottom">
+                                    <i class="fa-solid fa-angles-down mr-1"></i>
+                                </button>
+                            </div>
+
                         </div>
                     </div>
                     {% endfor %}
@@ -302,7 +341,15 @@ TEMPLATE = """
                 {% set c_date = task.completed_at | parse_date_str %}
                 <div class="task-card done-item flex items-center justify-between p-3 rounded-lg border border-gray-800 opacity-75 {{ 'hidden' if loop.index > 5 and not show_all else '' }}">
                     <div class="flex items-center gap-3 flex-1 mr-3">
-                        <input type="checkbox" checked onchange="markTodo('{{ current_page_id }}', '{{ tid }}')" class="w-5 h-5 accent-blue-500 cursor-pointer" title="Move back to To-Do">
+                        <div class="relative flex flex-col items-center gap-1 shrink-0">
+                            <button type="button" onclick="markTodo('{{ current_page_id }}', '{{ tid }}')" class="text-[10px] text-blue-400 hover:text-blue-300 whitespace-nowrap">Mark Not Done</button>
+                            <button type="button" onclick="toggleMoveMenu(event, '{{ tid }}')" class="text-[10px] text-amber-300 hover:text-amber-200 whitespace-nowrap">Move to</button>
+                            <div id="move-menu-{{ tid }}" class="move-menu hidden absolute left-0 top-full mt-1 bg-[#242424] border border-gray-700 rounded-lg shadow-2xl py-1 z-[100]">
+                                {% for target_title, target_key in sections %}
+                                <button type="button" onclick="moveTaskToSection('{{ current_page_id }}', '{{ tid }}', '{{ target_key }}')" class="w-full text-left px-3 py-2 text-xs text-gray-300 hover:bg-gray-700">{{ target_title }}</button>
+                                {% endfor %}
+                            </div>
+                        </div>
                         <span class="line-through text-gray-400 text-sm">{{ task.text }}</span>
                     </div>
                     <div class="flex items-center gap-3">
@@ -417,6 +464,35 @@ TEMPLATE = """
         function markTodo(pageId, taskId) {
             fetch(`/page/${pageId}/task/${taskId}/todo`, {method: 'POST'}).then(() => location.reload());
         }
+
+        function toggleMoveMenu(event, taskId) {
+            event.stopPropagation();
+            document.querySelectorAll('.move-menu').forEach(menu => {
+                if (menu.id !== 'move-menu-' + taskId) menu.classList.add('hidden');
+            });
+            document.getElementById('move-menu-' + taskId).classList.toggle('hidden');
+        }
+
+        function moveTaskToSection(pageId, taskId, section) {
+            fetch(`/page/${pageId}/task/${taskId}/move-section`, {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({section: section})
+            }).then(() => location.reload());
+        }
+
+        document.addEventListener('click', function(event) {
+            if (!event.target.closest('.move-menu') &&
+                !event.target.closest('button[onclick^="toggleMoveMenu"]')) {
+                document.querySelectorAll('.move-menu').forEach(menu => menu.classList.add('hidden'));
+            }
+        });
+        function autoResizeTask(textarea) {
+            // Reset first so the height can also shrink when text is deleted.
+            textarea.style.height = 'auto';
+            textarea.style.height = textarea.scrollHeight + 'px';
+        }
+
         function updateTask(pageId, taskId, text) {
             fetch(`/page/${pageId}/task/${taskId}/update`, {
                 method: 'POST',
@@ -436,6 +512,12 @@ TEMPLATE = """
         }
         function pushToTop(pageId, taskId) {
             fetch(`/page/${pageId}/task/${taskId}/push-top`, {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'}
+            }).then(() => location.reload());
+        }
+        function pushToBottom(pageId, taskId) {
+            fetch(`/page/${pageId}/task/${taskId}/push-bottom`, {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'}
             }).then(() => location.reload());
@@ -546,6 +628,7 @@ TEMPLATE = """
             if (currentPageId) {
                 applySectionState(currentPageId);
             }
+            document.querySelectorAll('.task-textarea').forEach(autoResizeTask);
         });
     </script>
 </body>
@@ -785,6 +868,9 @@ def mark_done(page_id, tid):
   data = load_data()
   if page_id in data["pages"] and tid in data["pages"][page_id]["tasks"]:
     t = data["pages"][page_id]["tasks"][tid]
+    # Remember the active section so "Mark Not Done" can restore it.
+    if t.get("status") != "done" and t.get("status") in {"todo", "bp", "chapter", "other"}:
+      t["return_status"] = t["status"]
     t["status"] = "done"
     t["completed_at"] = datetime.utcnow().isoformat()
     save_data(data)
@@ -796,7 +882,11 @@ def mark_todo(page_id, tid):
   data = load_data()
   if page_id in data["pages"] and tid in data["pages"][page_id]["tasks"]:
     t = data["pages"][page_id]["tasks"][tid]
-    t["status"] = "todo"
+    previous_section = t.get("return_status", "todo")
+    if previous_section not in {"todo", "bp", "chapter", "other"}:
+      previous_section = "todo"
+    t["status"] = previous_section
+    t.pop("return_status", None)
     t["completed_at"] = None
     t["last_active_date"] = datetime.utcnow().isoformat()
     if "task_order" not in data["pages"][page_id]:
@@ -826,6 +916,32 @@ def delete_task(page_id, tid):
     if tid in data["pages"][page_id].get("task_order", []):
       data["pages"][page_id]["task_order"].remove(tid)
     save_data(data)
+  return jsonify({"success": True})
+
+
+@app.route("/page/<page_id>/task/<tid>/move-section", methods=["POST"])
+def move_task_to_section(page_id, tid):
+  data = load_data()
+  valid_sections = {"todo", "bp", "chapter", "other"}
+  target = (request.get_json(silent=True) or {}).get("section")
+
+  if target not in valid_sections:
+    return jsonify({"success": False, "error": "Invalid section"}), 400
+
+  if page_id in data["pages"] and tid in data["pages"][page_id]["tasks"]:
+    page = data["pages"][page_id]
+    task = page["tasks"][tid]
+    task["status"] = target
+    task["completed_at"] = None
+    task["last_active_date"] = datetime.utcnow().isoformat()
+
+    if "task_order" not in page:
+      page["task_order"] = list(page.get("tasks", {}).keys())
+    if tid in page["task_order"]:
+      page["task_order"].remove(tid)
+    page["task_order"].insert(0, tid)
+    save_data(data)
+
   return jsonify({"success": True})
 
 
@@ -862,6 +978,22 @@ def push_top(page_id, tid):
     if tid in order:
       order.remove(tid)
       order.insert(0, tid)
+      save_data(data)
+  return jsonify({"success": True})
+
+
+@app.route("/page/<page_id>/task/<tid>/push-bottom", methods=["POST"])
+def push_bottom(page_id, tid):
+  data = load_data()
+  if page_id in data["pages"]:
+    page = data["pages"][page_id]
+    if "task_order" not in page:
+      page["task_order"] = list(page.get("tasks", {}).keys())
+
+    order = page["task_order"]
+    if tid in order:
+      order.remove(tid)
+      order.append(tid)
       save_data(data)
   return jsonify({"success": True})
 
