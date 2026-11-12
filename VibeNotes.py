@@ -292,24 +292,24 @@ TEMPLATE = """
                             <!-- Two-by-two task reorder controls -->
                             <div class="grid grid-cols-2 gap-2">
                                 <button type="button" onclick="moveTask('{{ current_page_id }}', '{{ tid }}', 'up')"
-                                        class="min-w-[76px] px-2 py-2 text-[10px] text-gray-300 hover:text-white bg-gray-900 hover:bg-gray-700 rounded"
+                                        class="w-[38px] h-[38px] min-w-0 p-0 flex items-center justify-center text-[10px] text-gray-300 hover:text-white bg-gray-900 hover:bg-gray-700 rounded"
                                         title="Move Above" aria-label="Move Above">
-                                    <i class="fa-solid fa-chevron-up mr-1"></i>
+                                    <i class="fa-solid fa-chevron-up"></i>
                                 </button>
                                 <button type="button" onclick="pushToTop('{{ current_page_id }}', '{{ tid }}')"
-                                        class="min-w-[76px] px-2 py-2 text-[10px] text-blue-400 hover:text-white bg-gray-900 hover:bg-gray-700 rounded"
+                                        class="w-[38px] h-[38px] min-w-0 p-0 flex items-center justify-center text-[10px] text-blue-400 hover:text-white bg-gray-900 hover:bg-gray-700 rounded"
                                         title="Move to Top" aria-label="Move to Top">
-                                    <i class="fa-solid fa-angles-up mr-1"></i>
+                                    <i class="fa-solid fa-angles-up"></i>
                                 </button>
                                 <button type="button" onclick="moveTask('{{ current_page_id }}', '{{ tid }}', 'down')"
-                                        class="min-w-[76px] px-2 py-2 text-[10px] text-gray-300 hover:text-white bg-gray-900 hover:bg-gray-700 rounded"
+                                        class="w-[38px] h-[38px] min-w-0 p-0 flex items-center justify-center text-[10px] text-gray-300 hover:text-white bg-gray-900 hover:bg-gray-700 rounded"
                                         title="Move Below" aria-label="Move Below">
-                                    <i class="fa-solid fa-chevron-down mr-1"></i>
+                                    <i class="fa-solid fa-chevron-down"></i>
                                 </button>
                                 <button type="button" onclick="pushToBottom('{{ current_page_id }}', '{{ tid }}')"
-                                        class="min-w-[76px] px-2 py-2 text-[10px] text-blue-400 hover:text-white bg-gray-900 hover:bg-gray-700 rounded"
+                                        class="w-[38px] h-[38px] min-w-0 p-0 flex items-center justify-center text-[10px] text-blue-400 hover:text-white bg-gray-900 hover:bg-gray-700 rounded"
                                         title="Move to Bottom" aria-label="Move to Bottom">
-                                    <i class="fa-solid fa-angles-down mr-1"></i>
+                                    <i class="fa-solid fa-angles-down"></i>
                                 </button>
                             </div>
 
