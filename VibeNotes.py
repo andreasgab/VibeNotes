@@ -209,7 +209,7 @@ TEMPLATE = """
             ('To-Do', 'todo'),
             ('Business Performance', 'bp'),
             ('Chapter', 'chapter'),
-            ('Misc', 'misc')
+            ('Other', 'other')
         ] %}
 
         <!-- Active Sections Container -->
@@ -228,7 +228,7 @@ TEMPLATE = """
                     </div>
                     <label class="flex items-center gap-1.5 text-xs text-gray-400 cursor-pointer select-none bg-[#1e1e1e] px-2 py-0.5 rounded border border-gray-800 hover:border-gray-700">
                         <input type="checkbox" onchange="toggleHideSection('{{ current_page_id }}', '{{ sec_key }}', this)" class="accent-blue-500 rounded hide-checkbox-{{ sec_key }}">
-                        <span>Hide section</span>
+                        <span>Hide</span>
                     </label>
                 </div>
                 <div class="space-y-2 section-content-box" id="section-content-{{ sec_key }}">
@@ -451,7 +451,7 @@ TEMPLATE = """
         }
 
         function getDefaultSectionKeys() {
-            return ['todo', 'bp', 'chapter', 'misc'];
+            return ['todo', 'bp', 'chapter', 'other'];
         }
 
         function loadSectionOrder(pageId) {
@@ -589,7 +589,7 @@ def index():
 
     for tid, t in list(p.get("tasks", {}).items()):
       # Aging logic for active tasks
-      if t["status"] in ["todo", "bp", "chapter", "misc"]:
+      if t["status"] in ["todo", "bp", "chapter", "other"]:
         last_active = datetime.fromisoformat(t["last_active_date"])
         if (now - last_active).days >= 1:
           t["todo_days"] += 1
@@ -638,7 +638,7 @@ def export_pdf(page_id):
       ("TO-DO", "todo"),
       ("BUSINESS PERFORMANCE", "bp"),
       ("CHAPTER", "chapter"),
-      ("MISC", "misc"),
+      ("MISC", "other"),
   ]:
     lines.append(f"\n[ {sec_name} ]")
     sec_tasks = [
