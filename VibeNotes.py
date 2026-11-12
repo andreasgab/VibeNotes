@@ -678,10 +678,10 @@ def index():
           t["todo_days"] += 1
           t["last_active_date"] = now.isoformat()
           changed = True
-      # Cleanup completed tasks after 60 days
+      # Cleanup completed tasks after 180 days
       elif t["status"] == "done" and t.get("completed_at"):
         completed = datetime.fromisoformat(t["completed_at"])
-        if (now - completed).days >= 60:
+        if (now - completed).days >= 180:
           del p["tasks"][tid]
           if tid in p["task_order"]:
             p["task_order"].remove(tid)
