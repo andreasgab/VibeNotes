@@ -67,7 +67,7 @@
                     "status": "chapter",
                     "todo_days": 0,
                     "completed_at": null,
-                    "last_active_date": "2026-11-12T20:39:50.831117"
+                    "last_active_date": "2026-11-12T21:09:26.704565"
                 },
                 "18": {
                     "text": "send email to Eleni Alexandra",
@@ -102,16 +102,16 @@
                     "status": "bp",
                     "todo_days": 0,
                     "completed_at": null,
-                    "last_active_date": "2026-11-12T20:40:21.107614"
+                    "last_active_date": "2026-11-12T21:09:30.087759"
                 }
             },
             "task_order": [
                 "22",
+                "17",
                 "21",
                 "20",
                 "19",
                 "18",
-                "17",
                 "16",
                 "15",
                 "14",
