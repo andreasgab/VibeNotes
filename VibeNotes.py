@@ -222,9 +222,15 @@ TEMPLATE = """
             {% for sec_title, sec_key in sections %}
             <!-- Section: {{ sec_title }} -->
             <section class="mb-8 section-block" id="block-{{ sec_key }}" data-key="{{ sec_key }}">
+                {% set sec_count = namespace(value=0) %}
+                {% for count_task in tasks.values() %}
+                    {% if count_task.status == sec_key %}
+                        {% set sec_count.value = sec_count.value + 1 %}
+                    {% endif %}
+                {% endfor %}
                 <div class="flex justify-between items-center mb-3">
                     <div class="flex items-center gap-2">
-                        <h2 class="text-xs font-semibold uppercase tracking-wider text-gray-400 m-0">{{ sec_title }}</h2>
+                        <h2 class="text-xs font-semibold uppercase tracking-wider text-gray-400 m-0">{{ sec_title }} ({{ sec_count.value }})</h2>
                         <!-- Section Reorder Buttons -->
                         <div class="flex gap-0.5">
                             <button onclick="moveSection('{{ current_page_id }}', '{{ sec_key }}', 'up')" class="text-gray-500 hover:text-white text-[10px] px-1 bg-gray-900 rounded" title="Move Section Up"><i class="fa-solid fa-chevron-up"></i></button>
@@ -678,10 +684,10 @@ def index():
           t["todo_days"] += 1
           t["last_active_date"] = now.isoformat()
           changed = True
-      # Cleanup completed tasks after 180 days
+      # Cleanup completed tasks after 60 days
       elif t["status"] == "done" and t.get("completed_at"):
         completed = datetime.fromisoformat(t["completed_at"])
-        if (now - completed).days >= 180:
+        if (now - completed).days >= 60:
           del p["tasks"][tid]
           if tid in p["task_order"]:
             p["task_order"].remove(tid)
