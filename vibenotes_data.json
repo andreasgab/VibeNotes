@@ -30,10 +30,11 @@
                 },
                 "12": {
                     "text": "Main task organize with call & send email",
-                    "status": "bp",
+                    "status": "done",
                     "todo_days": 0,
-                    "completed_at": null,
-                    "last_active_date": "2026-11-12T20:39:01.028336"
+                    "completed_at": "2026-11-13T16:02:45.854295",
+                    "last_active_date": "2026-11-12T20:39:01.028336",
+                    "return_status": "bp"
                 },
                 "14": {
                     "text": "send Marianna the email about the ssp variance",
@@ -101,9 +102,34 @@
                     "todo_days": 0,
                     "completed_at": null,
                     "last_active_date": "2026-11-12T21:09:30.087759"
+                },
+                "24": {
+                    "text": "Create confluence page for ibro task, then put review",
+                    "status": "bp",
+                    "todo_days": 0,
+                    "completed_at": null,
+                    "last_active_date": "2026-11-13T16:03:00.530009"
+                },
+                "25": {
+                    "text": "Work on chan econ",
+                    "status": "bp",
+                    "todo_days": 0,
+                    "completed_at": null,
+                    "last_active_date": "2026-11-13T16:03:15.215677"
+                },
+                "26": {
+                    "text": "Send email with dataset to Genny + Kafetzis",
+                    "status": "done",
+                    "todo_days": 0,
+                    "completed_at": "2026-11-13T16:03:43.603006",
+                    "last_active_date": "2026-11-13T16:03:41.255112",
+                    "return_status": "bp"
                 }
             },
             "task_order": [
+                "26",
+                "25",
+                "24",
                 "17",
                 "21",
                 "22",
@@ -139,5 +165,5 @@
         }
     },
     "next_page_id": 5,
-    "next_task_id": 24
+    "next_task_id": 27
 }
