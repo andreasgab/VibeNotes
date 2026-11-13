@@ -24,9 +24,26 @@ FILE_PATH = os.path.join(BASE_DIR, "vibenotes_data.json")
 _git_timer = None
 
 
+def ensure_git_config():
+  try:
+    subprocess.run(
+        ["git", "config", "--local", "user.name", "VibeNotes Bot"],
+        cwd=BASE_DIR,
+        capture_output=True,
+    )
+    subprocess.run(
+        ["git", "config", "--local", "user.email", "vibenotes@pythonanywhere"],
+        cwd=BASE_DIR,
+        capture_output=True,
+    )
+  except Exception:
+    pass
+
+
 def delayed_git_push():
   global _git_timer
   try:
+    ensure_git_config()
     commit_message = f"Auto-update VibeNotes data at {datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S')}"
     subprocess.run(["git", "add", FILE_PATH], cwd=BASE_DIR, check=True)
     status = subprocess.run(
@@ -76,7 +93,6 @@ def init_json():
             }
         },
         "next_page_id": 2,
-        "next_task_id": 1,
     }
     with open(FILE_PATH, "w") as f:
       json.dump(default_data, f, indent=4)
@@ -147,9 +163,12 @@ TEMPLATE = """
 
     <!-- Header / Navbar -->
     <header class="bg-[#181818] border-b border-gray-800 px-3 py-2.5 sticky top-0 z-50 flex items-center justify-between flex-wrap gap-2">
-        <!-- Logo -->
-        <div class="flex items-center gap-2">
-            <span class="text-blue-500 font-black tracking-wider text-base uppercase bg-blue-500/10 px-2.5 py-1 rounded-lg border border-blue-500/20">VibeNotes</span>
+        <!-- Logo & Git Sync Button -->
+        <div class="flex items-center gap-3">
+            <span class="text-blue-500 font-black tracking-wider text-base uppercase bg-blue-500/10 px-2.5 py-1 rounded-lg border border-blue-500/25">VibeNotes</span>
+            <button onclick="syncGit()" class="text-gray-400 hover:text-white bg-gray-800 hover:bg-gray-700 px-2.5 py-1 rounded-lg text-xs font-medium flex items-center gap-1.5 transition border border-gray-700" title="Git Pull / Reset from GitHub">
+                <i class="fa-solid fa-rotate"></i> Sync
+            </button>
         </div>
 
         <!-- Tab Bar -->
@@ -194,6 +213,9 @@ TEMPLATE = """
             </div>
         </div>
     </div>
+
+    <!-- Toast Notification Popup -->
+    <div id="toast" class="hidden fixed bottom-5 right-5 text-xs px-4 py-2.5 rounded-lg shadow-2xl border z-[999999] transition-opacity duration-300 bg-gray-800 border-gray-700 text-white"></div>
 
     <!-- Main Content -->
     {% if current_page %}
@@ -289,7 +311,7 @@ TEMPLATE = """
                             <div class="relative flex flex-col items-stretch justify-center gap-2 shrink-0 self-center">
                                 <button type="button" onclick="markDone('{{ current_page_id }}', '{{ tid }}')" class="min-w-[42px] px-2 py-1 text-[10px] text-blue-400 hover:text-blue-300 bg-gray-800 hover:bg-gray-700 rounded text-center whitespace-nowrap">Mark Done</button>
                                 <button type="button" onclick="toggleMoveMenu(event, '{{ tid }}')" class="min-w-[42px] px-2 py-1 text-[10px] text-amber-300 hover:text-amber-200 bg-gray-800 hover:bg-gray-700 rounded text-center whitespace-nowrap">Move to</button>
-                                <button type="button" onclick="copyTaskText(this)" class="min-w-[42px] px-2 py-1 text-[10px] text-amber-300 hover:text-amber-200 bg-gray-800 hover:bg-gray-700 rounded text-center whitespace-nowrap">Copy</button>
+                                <button type="button" onclick="copyTaskTextById('{{ tid }}')" class="min-w-[42px] px-2 py-1 text-[10px] text-amber-300 hover:text-amber-200 bg-gray-800 hover:bg-gray-700 rounded text-center whitespace-nowrap">Copy</button>
                                 <div id="move-menu-{{ tid }}" class="move-menu hidden absolute left-0 top-full mt-1 bg-[#242424] border border-gray-700 rounded-lg shadow-2xl py-1 z-[100]">
                                     {% for target_title, target_key in sections %}
                                         {% if target_key != sec_key %}
@@ -298,7 +320,7 @@ TEMPLATE = """
                                     {% endfor %}
                                 </div>
                             </div>
-                            <textarea oninput="autoResizeTask(this)" onblur="updateTask('{{ current_page_id }}', '{{ tid }}', this.value)" rows="1" class="task-textarea bg-transparent border-none text-white w-full focus:outline-none focus:ring-1 focus:ring-blue-500 rounded px-1 resize-none overflow-hidden leading-6" style="height: 24px">{{ task.text }}</textarea>
+                            <textarea id="task-textarea-{{ tid }}" oninput="autoResizeTask(this)" onblur="updateTask('{{ current_page_id }}', '{{ tid }}', this.value)" rows="1" class="task-textarea bg-transparent border-none text-white w-full focus:outline-none focus:ring-1 focus:ring-blue-500 rounded px-1 resize-none overflow-hidden leading-6" style="height: 24px">{{ task.text }}</textarea>
                         </div>
                         <div class="flex items-center gap-3 shrink-0">
                             <!-- Days counter and delete button stacked to match -->
@@ -363,19 +385,19 @@ TEMPLATE = """
                 {% set c_date = task.completed_at | parse_date_str %}
                 {% set orig_sec = task.return_status if task.return_status in section_titles else 'todo' %}
                 {% set orig_sec_name = section_titles.get(orig_sec, 'To-Do') %}
-                <div class="task-card done-item flex items-center justify-between p-3 rounded-lg border border-gray-800 opacity-75 {{ 'hidden' if loop.index > 5 and not show_all else '' }}">
+                <div class="task-card done-item flex items-center justify-between p-3 rounded-lg border border-gray-800 opacity-75 {{ 'hidden' if loop.index > 5 and not show_all else '' }}" data-id="{{ tid }}">
                     <div class="flex items-center gap-3 flex-1 mr-3">
                         <div class="relative flex flex-col items-center gap-1 shrink-0">
                             <button type="button" onclick="markTodo('{{ current_page_id }}', '{{ tid }}')" class="text-[10px] text-blue-400 hover:text-blue-300 whitespace-nowrap">Mark Not Done</button>
                             <button type="button" onclick="toggleMoveMenu(event, '{{ tid }}')" class="text-[10px] text-amber-300 hover:text-amber-200 whitespace-nowrap">Move to</button>
-                            <button type="button" onclick="copyTaskText(this)" class="text-[10px] text-amber-300 hover:text-amber-200 whitespace-nowrap">Copy</button>
+                            <button type="button" onclick="copyTaskTextById('{{ tid }}')" class="text-[10px] text-amber-300 hover:text-amber-200 whitespace-nowrap">Copy</button>
                             <div id="move-menu-{{ tid }}" class="move-menu hidden absolute left-0 top-full mt-1 bg-[#242424] border border-gray-700 rounded-lg shadow-2xl py-1 z-[100]">
                                 {% for target_title, target_key in sections %}
                                 <button type="button" onclick="moveTaskToSection('{{ current_page_id }}', '{{ tid }}', '{{ target_key }}')" class="w-full text-left px-3 py-2 text-xs text-gray-300 hover:bg-gray-700">{{ target_title }}</button>
                                 {% endfor %}
                             </div>
                         </div>
-                        <span class="line-through text-gray-400 text-sm">{{ task.text }}</span>
+                        <span id="task-span-{{ tid }}" class="line-through text-gray-400 text-sm">{{ task.text }}</span>
                     </div>
                     <div class="flex items-center gap-3 self-center">
                         <div class="flex flex-col items-center text-xs text-gray-400 font-mono bg-gray-900 px-2.5 py-1 rounded">
@@ -419,6 +441,41 @@ TEMPLATE = """
                 }
             });
         });
+
+        function showToast(message, isError = false) {
+            let toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.className = "fixed bottom-5 right-5 text-xs px-4 py-2.5 rounded-lg shadow-2xl border z-[999999] transition-opacity duration-300 " + 
+                (isError ? "bg-red-900 border-red-700 text-white" : "bg-gray-800 border-gray-700 text-white");
+            toast.classList.remove('hidden');
+            setTimeout(() => {
+                toast.classList.add('hidden');
+            }, 3000);
+        }
+
+        function syncGit() {
+            let btn = event.currentTarget;
+            let originalHTML = btn.innerHTML;
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Syncing...';
+            fetch('/git-sync', {method: 'POST'})
+                .then(res => res.json())
+                .then(data => {
+                    if (data.success) {
+                        showToast("Synced with GitHub successfully!");
+                        setTimeout(() => location.reload(), 1000);
+                    } else {
+                        showToast("Sync failed: " + (data.error || "Unknown error"), true);
+                        btn.disabled = false;
+                        btn.innerHTML = originalHTML;
+                    }
+                })
+                .catch(err => {
+                    showToast("Sync error", true);
+                    btn.disabled = false;
+                    btn.innerHTML = originalHTML;
+                });
+        }
 
         function toggleMenu(event, id) {
             event.stopPropagation();
@@ -493,13 +550,20 @@ TEMPLATE = """
             fetch(`/page/${pageId}/task/${taskId}/todo`, {method: 'POST'}).then(() => location.reload());
         }
 
-        function copyTaskText(buttonElem) {
-            let card = buttonElem.closest('.task-card');
-            let textarea = card.querySelector('textarea');
-            let span = card.querySelector('span.line-through');
-            let text = textarea ? textarea.value : (span ? span.textContent : '');
-            navigator.clipboard.writeText(text).catch(err => {
+        function copyTaskTextById(tid) {
+            let textarea = document.getElementById('task-textarea-' + tid);
+            let span = document.getElementById('task-span-' + tid);
+            let text = '';
+            if (textarea) {
+                text = textarea.value;
+            } else if (span) {
+                text = span.textContent;
+            }
+            navigator.clipboard.writeText(text).then(() => {
+                showToast("Task copied to clipboard");
+            }).catch(err => {
                 console.error('Failed to copy text: ', err);
+                showToast("Failed to copy", true);
             });
         }
 
@@ -526,7 +590,6 @@ TEMPLATE = """
             }
         });
         function autoResizeTask(textarea) {
-            // Reset first so the height can also shrink when text is deleted.
             textarea.style.height = 'auto';
             textarea.style.height = textarea.scrollHeight + 'px';
         }
@@ -579,7 +642,6 @@ TEMPLATE = """
                 let stored = localStorage.getItem(getOrderStorageKey(pageId));
                 let keys = stored ? JSON.parse(stored) : getDefaultSectionKeys();
                 let defaults = getDefaultSectionKeys();
-                // Ensure all current keys are present if updated in code
                 defaults.forEach(k => { if (!keys.includes(k)) keys.push(k); });
                 return keys.filter(k => defaults.includes(k));
             } catch(e) {
@@ -610,7 +672,6 @@ TEMPLATE = """
             let activeContainer = document.getElementById('active-sections-container');
             let hiddenContainer = document.getElementById('hidden-sections-container');
 
-            // Reorder DOM elements according to stored section order
             order.forEach(key => {
                 let block = document.getElementById('block-' + key);
                 if (block) {
@@ -737,6 +798,25 @@ def index():
   )
 
 
+@app.route("/git-sync", methods=["POST"])
+def git_sync():
+  try:
+    ensure_git_config()
+    # Attempt regular git pull first
+    res = subprocess.run(
+        ["git", "pull"], cwd=BASE_DIR, capture_output=True, text=True
+    )
+    if res.returncode != 0:
+      # If divergent or conflict, fetch and reset hard to origin/main
+      subprocess.run(["git", "fetch", "origin"], cwd=BASE_DIR, check=True)
+      subprocess.run(
+          ["git", "reset", "--hard", "origin/main"], cwd=BASE_DIR, check=True
+      )
+    return jsonify({"success": True})
+  except Exception as e:
+    return jsonify({"success": False, "error": str(e)}), 500
+
+
 @app.route("/page/<page_id>/export_pdf")
 def export_pdf(page_id):
   data = load_data()
@@ -837,8 +917,8 @@ def duplicate_page(id):
   data = load_data()
   if id in data["pages"]:
     orig = data["pages"][id]
-    new_id = str(data["next_page_id"])
-    data["next_page_id"] += 1
+    new_id = str(data.get("next_page_id", 2))
+    data["next_page_id"] = int(new_id) + 1
 
     duplicated_tasks = {}
     for tid, t in orig["tasks"].items():
@@ -884,10 +964,16 @@ def add_task(page_id):
     text = req.get("text") or request.form.get("text")
     section = req.get("section", "todo")
     if text:
-      tid = str(data.get("next_task_id", 1))
-      data["next_task_id"] = int(tid) + 1
+      all_tids = []
+      for p in data["pages"].values():
+        for t_id in p.get("tasks", {}).keys():
+          try:
+            all_tids.append(int(t_id))
+          except:
+            pass
+      new_tid = str(max(all_tids) + 1 if all_tids else 1)
 
-      data["pages"][page_id]["tasks"][tid] = {
+      data["pages"][page_id]["tasks"][new_tid] = {
           "text": text,
           "status": section,
           "todo_days": 0,
@@ -896,7 +982,7 @@ def add_task(page_id):
       }
       if "task_order" not in data["pages"][page_id]:
         data["pages"][page_id]["task_order"] = []
-      data["pages"][page_id]["task_order"].insert(0, tid)
+      data["pages"][page_id]["task_order"].insert(0, new_tid)
       save_data(data)
   return jsonify({"success": True})
 
@@ -906,8 +992,12 @@ def mark_done(page_id, tid):
   data = load_data()
   if page_id in data["pages"] and tid in data["pages"][page_id]["tasks"]:
     t = data["pages"][page_id]["tasks"][tid]
-    # Remember the active section so "Mark Not Done" and Done display can reference it.
-    if t.get("status") != "done" and t.get("status") in {"todo", "bp", "chapter", "other"}:
+    if t.get("status") != "done" and t.get("status") in {
+        "todo",
+        "bp",
+        "chapter",
+        "other",
+    }:
       t["return_status"] = t["status"]
     t["status"] = "done"
     t["completed_at"] = datetime.utcnow().isoformat()
