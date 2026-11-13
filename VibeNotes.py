@@ -216,6 +216,13 @@ TEMPLATE = """
             ('Chapter', 'chapter'),
             ('Other', 'other')
         ] %}
+        
+        {% set section_titles = {
+            'todo': 'To-Do',
+            'bp': 'Business Performance',
+            'chapter': 'Chapter',
+            'other': 'Other'
+        } %}
 
         <!-- Active Sections Container -->
         <div id="active-sections-container">
@@ -256,24 +263,33 @@ TEMPLATE = """
                         </div>
                     </div>
 
-                    {% set sec_tasks = [] %}
+                    {% set sec_tasks_ns = namespace(items=[]) %}
                     {% for tid in task_order %}
                         {% if tid in tasks and tasks[tid].status == sec_key %}
-                            {% set _ = sec_tasks.append((tid, tasks[tid])) %}
+                            {% set _ = sec_tasks_ns.items.append((tid, tasks[tid])) %}
                         {% endif %}
                     {% endfor %}
                     {% for tid, t in tasks.items() %}
                         {% if t.status == sec_key and tid not in task_order %}
-                            {% set _ = sec_tasks.append((tid, t)) %}
+                            {% set already = false %}
+                            {% for existing_tid, existing_t in sec_tasks_ns.items %}
+                                {% if existing_tid == tid %}
+                                    {% set already = true %}
+                                {% endif %}
+                            {% endfor %}
+                            {% if not already %}
+                                {% set _ = sec_tasks_ns.items.append((tid, t)) %}
+                            {% endif %}
                         {% endif %}
                     {% endfor %}
 
-                    {% for tid, task in sec_tasks %}
+                    {% for tid, task in sec_tasks_ns.items %}
                     <div class="task-card flex items-center justify-between p-3 rounded-lg border border-gray-800" data-id="{{ tid }}">
                         <div class="flex items-start gap-3 flex-1 mr-3">
                             <div class="relative flex flex-col items-stretch justify-center gap-2 shrink-0 self-center">
                                 <button type="button" onclick="markDone('{{ current_page_id }}', '{{ tid }}')" class="min-w-[42px] px-2 py-1 text-[10px] text-blue-400 hover:text-blue-300 bg-gray-800 hover:bg-gray-700 rounded text-center whitespace-nowrap">Mark Done</button>
                                 <button type="button" onclick="toggleMoveMenu(event, '{{ tid }}')" class="min-w-[42px] px-2 py-1 text-[10px] text-amber-300 hover:text-amber-200 bg-gray-800 hover:bg-gray-700 rounded text-center whitespace-nowrap">Move to</button>
+                                <button type="button" onclick="copyTaskText(this)" class="min-w-[42px] px-2 py-1 text-[10px] text-amber-300 hover:text-amber-200 bg-gray-800 hover:bg-gray-700 rounded text-center whitespace-nowrap">Copy</button>
                                 <div id="move-menu-{{ tid }}" class="move-menu hidden absolute left-0 top-full mt-1 bg-[#242424] border border-gray-700 rounded-lg shadow-2xl py-1 z-[100]">
                                     {% for target_title, target_key in sections %}
                                         {% if target_key != sec_key %}
@@ -331,13 +347,13 @@ TEMPLATE = """
         <section class="mb-6" id="done-section-block">
             <h2 class="text-xs font-semibold uppercase tracking-wider text-gray-400 mb-3">Done (Most Recent)</h2>
             <div class="space-y-2" id="done-container">
-                {% set done_tasks = [] %}
+                {% set done_tasks_ns = namespace(items=[]) %}
                 {% for tid, t in tasks.items() %}
                     {% if t.status == 'done' %}
-                        {% set _ = done_tasks.append((tid, t)) %}
+                        {% set _ = done_tasks_ns.items.append((tid, t)) %}
                     {% endif %}
                 {% endfor %}
-                {% set sorted_done = done_tasks | sort(attribute='1.completed_at', reverse=True) %}
+                {% set sorted_done = done_tasks_ns.items | sort(attribute='1.completed_at', reverse=True) %}
 
                 {% if not sorted_done %}
                     <p class="text-sm text-gray-500 italic">No completed tasks.</p>
@@ -345,11 +361,14 @@ TEMPLATE = """
                 
                 {% for tid, task in sorted_done %}
                 {% set c_date = task.completed_at | parse_date_str %}
+                {% set orig_sec = task.return_status if task.return_status in section_titles else 'todo' %}
+                {% set orig_sec_name = section_titles.get(orig_sec, 'To-Do') %}
                 <div class="task-card done-item flex items-center justify-between p-3 rounded-lg border border-gray-800 opacity-75 {{ 'hidden' if loop.index > 5 and not show_all else '' }}">
                     <div class="flex items-center gap-3 flex-1 mr-3">
                         <div class="relative flex flex-col items-center gap-1 shrink-0">
                             <button type="button" onclick="markTodo('{{ current_page_id }}', '{{ tid }}')" class="text-[10px] text-blue-400 hover:text-blue-300 whitespace-nowrap">Mark Not Done</button>
                             <button type="button" onclick="toggleMoveMenu(event, '{{ tid }}')" class="text-[10px] text-amber-300 hover:text-amber-200 whitespace-nowrap">Move to</button>
+                            <button type="button" onclick="copyTaskText(this)" class="text-[10px] text-amber-300 hover:text-amber-200 whitespace-nowrap">Copy</button>
                             <div id="move-menu-{{ tid }}" class="move-menu hidden absolute left-0 top-full mt-1 bg-[#242424] border border-gray-700 rounded-lg shadow-2xl py-1 z-[100]">
                                 {% for target_title, target_key in sections %}
                                 <button type="button" onclick="moveTaskToSection('{{ current_page_id }}', '{{ tid }}', '{{ target_key }}')" class="w-full text-left px-3 py-2 text-xs text-gray-300 hover:bg-gray-700">{{ target_title }}</button>
@@ -358,8 +377,11 @@ TEMPLATE = """
                         </div>
                         <span class="line-through text-gray-400 text-sm">{{ task.text }}</span>
                     </div>
-                    <div class="flex items-center gap-3">
-                        <span class="text-xs text-gray-500 font-mono bg-gray-900 px-2 py-1 rounded" title="Completion Date">{{ c_date.strftime('%d/%m/%Y') if c_date else '' }}</span>
+                    <div class="flex items-center gap-3 self-center">
+                        <div class="flex flex-col items-center text-xs text-gray-400 font-mono bg-gray-900 px-2.5 py-1 rounded">
+                            <span title="Completion Date">{{ c_date.strftime('%d/%m/%Y') if c_date else '' }}</span>
+                            <span class="text-[10px] text-gray-500 font-sans tracking-tight" title="Originating Section">{{ orig_sec_name }}</span>
+                        </div>
                         <button onclick="deleteTask('{{ current_page_id }}', '{{ tid }}')" class="text-gray-500 hover:text-red-400 text-sm"><i class="fa-solid fa-xmark"></i></button>
                     </div>
                 </div>
@@ -469,6 +491,16 @@ TEMPLATE = """
         }
         function markTodo(pageId, taskId) {
             fetch(`/page/${pageId}/task/${taskId}/todo`, {method: 'POST'}).then(() => location.reload());
+        }
+
+        function copyTaskText(buttonElem) {
+            let card = buttonElem.closest('.task-card');
+            let textarea = card.querySelector('textarea');
+            let span = card.querySelector('span.line-through');
+            let text = textarea ? textarea.value : (span ? span.textContent : '');
+            navigator.clipboard.writeText(text).catch(err => {
+                console.error('Failed to copy text: ', err);
+            });
         }
 
         function toggleMoveMenu(event, taskId) {
@@ -874,7 +906,7 @@ def mark_done(page_id, tid):
   data = load_data()
   if page_id in data["pages"] and tid in data["pages"][page_id]["tasks"]:
     t = data["pages"][page_id]["tasks"][tid]
-    # Remember the active section so "Mark Not Done" can restore it.
+    # Remember the active section so "Mark Not Done" and Done display can reference it.
     if t.get("status") != "done" and t.get("status") in {"todo", "bp", "chapter", "other"}:
       t["return_status"] = t["status"]
     t["status"] = "done"
