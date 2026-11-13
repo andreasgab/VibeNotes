@@ -6,13 +6,6 @@
             "is_expiring": false,
             "created_at": "2026-11-01T14:42:15.317741",
             "tasks": {
-                "4": {
-                    "text": "hello",
-                    "status": "todo",
-                    "todo_days": 1,
-                    "completed_at": null,
-                    "last_active_date": "2026-11-12T21:11:44.828008"
-                },
                 "7": {
                     "text": "ggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg",
                     "status": "main",
@@ -29,10 +22,11 @@
                 },
                 "11": {
                     "text": "Jagjit customer base 2 tickets to resolve",
-                    "status": "bp",
+                    "status": "done",
                     "todo_days": 0,
-                    "completed_at": null,
-                    "last_active_date": "2026-11-12T20:38:31.303010"
+                    "completed_at": "2026-11-13T16:01:40.534272",
+                    "last_active_date": "2026-11-12T20:38:31.303010",
+                    "return_status": "bp"
                 },
                 "12": {
                     "text": "Main task organize with call & send email",
@@ -43,10 +37,11 @@
                 },
                 "14": {
                     "text": "send Marianna the email about the ssp variance",
-                    "status": "todo",
+                    "status": "done",
                     "todo_days": 0,
-                    "completed_at": null,
-                    "last_active_date": "2026-11-12T20:39:22.144940"
+                    "completed_at": "2026-11-13T16:02:02.135966",
+                    "last_active_date": "2026-11-12T20:39:22.144940",
+                    "return_status": "todo"
                 },
                 "15": {
                     "text": "BRM info of largest TP gap contract",
@@ -57,10 +52,11 @@
                 },
                 "16": {
                     "text": "review the asks of EY before the meeting",
-                    "status": "todo",
+                    "status": "done",
                     "todo_days": 0,
-                    "completed_at": null,
-                    "last_active_date": "2026-11-12T20:39:40.662801"
+                    "completed_at": "2026-11-13T16:01:55.011566",
+                    "last_active_date": "2026-11-12T20:39:40.662801",
+                    "return_status": "todo"
                 },
                 "17": {
                     "text": "speak with mubin and get a timeframe on how long will it take \nto not be using miner mkt",
@@ -71,10 +67,11 @@
                 },
                 "18": {
                     "text": "send email to Eleni Alexandra",
-                    "status": "todo",
+                    "status": "done",
                     "todo_days": 0,
-                    "completed_at": null,
-                    "last_active_date": "2026-11-12T20:39:57.886108"
+                    "completed_at": "2026-11-13T16:01:52.627296",
+                    "last_active_date": "2026-11-12T20:39:57.886108",
+                    "return_status": "todo"
                 },
                 "19": {
                     "text": "Control 235 non eligible s15 pobs, from det",
@@ -85,10 +82,11 @@
                 },
                 "20": {
                     "text": "ibro fix m13 table error",
-                    "status": "bp",
+                    "status": "done",
                     "todo_days": 0,
-                    "completed_at": null,
-                    "last_active_date": "2026-11-12T20:40:09.751736"
+                    "completed_at": "2026-11-13T16:01:45.810353",
+                    "last_active_date": "2026-11-12T20:40:09.751736",
+                    "return_status": "bp"
                 },
                 "21": {
                     "text": "App Improvements: keep original date for days, even if moved t\no done and back, bigger free text box, easy push to top button, the field must empty when a\n new task Is created in done, add a special mentions segment above the Done",
@@ -118,8 +116,7 @@
                 "12",
                 "11",
                 "7",
-                "8",
-                "4"
+                "8"
             ]
         },
         "3": {
