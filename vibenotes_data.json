@@ -49,7 +49,7 @@
                     "status": "todo",
                     "todo_days": 0,
                     "completed_at": null,
-                    "last_active_date": "2026-11-12T20:39:33.239921"
+                    "last_active_date": "2026-11-13T19:14:52.310044"
                 },
                 "16": {
                     "text": "review the asks of EY before the meeting",
@@ -79,7 +79,7 @@
                     "status": "todo",
                     "todo_days": 0,
                     "completed_at": null,
-                    "last_active_date": "2026-11-12T20:40:02.142614"
+                    "last_active_date": "2026-11-13T19:14:44.904825"
                 },
                 "20": {
                     "text": "ibro fix m13 table error",
@@ -131,9 +131,17 @@
                     "todo_days": 0,
                     "completed_at": null,
                     "last_active_date": "2026-11-13T16:06:03.353553"
+                },
+                "30": {
+                    "text": "Coupons report. Find",
+                    "status": "todo",
+                    "todo_days": 0,
+                    "completed_at": null,
+                    "last_active_date": "2026-11-13T19:14:24.070568"
                 }
             },
             "task_order": [
+                "30",
                 "29",
                 "26",
                 "25",
