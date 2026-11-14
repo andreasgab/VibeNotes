@@ -145,9 +145,17 @@
                     "todo_days": 0,
                     "completed_at": null,
                     "last_active_date": "2026-11-14T00:19:34.586536"
+                },
+                "32": {
+                    "text": "Coa dataset sent to Genny contains codes not found in inadvance. They could still be found in inarrear. Maybe anti join with that column as well",
+                    "status": "bp",
+                    "todo_days": 0,
+                    "completed_at": null,
+                    "last_active_date": "2026-11-14T08:09:38.373601"
                 }
             },
             "task_order": [
+                "32",
                 "31",
                 "30",
                 "29",
