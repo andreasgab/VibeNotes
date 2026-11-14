@@ -62,9 +62,9 @@
                 "17": {
                     "text": "Speak with mubin and get a relative time frame for how long will it take to detatch from miner",
                     "status": "chapter",
-                    "todo_days": 0,
+                    "todo_days": 1,
                     "completed_at": null,
-                    "last_active_date": "2026-11-12T21:11:48.524831"
+                    "last_active_date": "2026-11-14T00:18:50.357773"
                 },
                 "18": {
                     "text": "send email to Eleni Alexandra",
@@ -99,9 +99,9 @@
                 "22": {
                     "text": "create confluence page for task, then put review",
                     "status": "bp",
-                    "todo_days": 0,
+                    "todo_days": 1,
                     "completed_at": null,
-                    "last_active_date": "2026-11-12T21:09:30.087759"
+                    "last_active_date": "2026-11-14T00:18:50.357773"
                 },
                 "24": {
                     "text": "Create confluence page for ibro task, then put review",
