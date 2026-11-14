@@ -138,9 +138,17 @@
                     "todo_days": 0,
                     "completed_at": null,
                     "last_active_date": "2026-11-13T19:14:24.070568"
+                },
+                "31": {
+                    "text": "Assess EY effort and organize to talk with Marianna",
+                    "status": "todo",
+                    "todo_days": 0,
+                    "completed_at": null,
+                    "last_active_date": "2026-11-14T00:19:34.586536"
                 }
             },
             "task_order": [
+                "31",
                 "30",
                 "29",
                 "26",
