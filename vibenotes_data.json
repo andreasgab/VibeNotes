@@ -47,9 +47,9 @@
                 "15": {
                     "text": "BRM info of largest TP gap contract",
                     "status": "todo",
-                    "todo_days": 0,
+                    "todo_days": 1,
                     "completed_at": null,
-                    "last_active_date": "2026-11-13T19:14:52.310044"
+                    "last_active_date": "2026-11-14T21:02:13.642678"
                 },
                 "16": {
                     "text": "review the asks of EY before the meeting",
@@ -64,7 +64,7 @@
                     "status": "chapter",
                     "todo_days": 1,
                     "completed_at": null,
-                    "last_active_date": "2026-11-14T00:18:50.357773"
+                    "last_active_date": "2026-11-14T21:02:28.895452"
                 },
                 "18": {
                     "text": "send email to Eleni Alexandra",
@@ -77,9 +77,9 @@
                 "19": {
                     "text": "Control 235 non eligible s15 pobs, from det",
                     "status": "todo",
-                    "todo_days": 0,
+                    "todo_days": 1,
                     "completed_at": null,
-                    "last_active_date": "2026-11-13T19:14:44.904825"
+                    "last_active_date": "2026-11-14T21:02:13.642678"
                 },
                 "20": {
                     "text": "ibro fix m13 table error",
@@ -101,21 +101,21 @@
                     "status": "bp",
                     "todo_days": 1,
                     "completed_at": null,
-                    "last_active_date": "2026-11-14T00:18:50.357773"
+                    "last_active_date": "2026-11-14T21:03:07.292986"
                 },
                 "24": {
                     "text": "Create confluence page for ibro task, then put review",
                     "status": "bp",
-                    "todo_days": 0,
+                    "todo_days": 1,
                     "completed_at": null,
-                    "last_active_date": "2026-11-13T16:03:00.530009"
+                    "last_active_date": "2026-11-14T21:03:04.936948"
                 },
                 "25": {
                     "text": "Work on chan econ totals + a dataset",
                     "status": "bp",
-                    "todo_days": 0,
+                    "todo_days": 1,
                     "completed_at": null,
-                    "last_active_date": "2026-11-13T16:03:15.215677"
+                    "last_active_date": "2026-11-14T21:03:01.995622"
                 },
                 "26": {
                     "text": "Send email with dataset to Genny + Kafetzis",
@@ -128,16 +128,16 @@
                 "29": {
                     "text": "Reminder email to Citrix",
                     "status": "chapter",
-                    "todo_days": 0,
+                    "todo_days": 1,
                     "completed_at": null,
-                    "last_active_date": "2026-11-13T16:06:03.353553"
+                    "last_active_date": "2026-11-14T21:02:13.642678"
                 },
                 "30": {
                     "text": "Coupons report. Find link between S15 and BAs of file",
                     "status": "todo",
-                    "todo_days": 0,
+                    "todo_days": 1,
                     "completed_at": null,
-                    "last_active_date": "2026-11-13T19:14:24.070568"
+                    "last_active_date": "2026-11-14T21:02:13.642678"
                 },
                 "31": {
                     "text": "Assess EY effort and organize to talk with Marianna",
@@ -177,25 +177,15 @@
                 "8"
             ]
         },
-        "3": {
-            "id": 3,
-            "name": "New List",
-            "is_expiring": true,
-            "created_at": "2026-11-01T14:44:47.609880",
-            "tasks": {
-                "6": {
-                    "text": "ht",
-                    "status": "done",
-                    "todo_days": 0,
-                    "completed_at": "2026-11-01T14:44:56.966339",
-                    "last_active_date": "2026-11-01T14:44:55.685338"
-                }
-            },
-            "task_order": [
-                "6"
-            ]
+        "5": {
+            "id": 5,
+            "name": "SM",
+            "is_expiring": false,
+            "created_at": "2026-11-14T21:03:33.106105",
+            "tasks": {},
+            "task_order": []
         }
     },
-    "next_page_id": 5,
+    "next_page_id": 6,
     "next_task_id": 30
 }
