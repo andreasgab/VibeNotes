@@ -182,8 +182,34 @@
             "name": "SM",
             "is_expiring": false,
             "created_at": "2026-11-14T21:03:33.106105",
-            "tasks": {},
-            "task_order": []
+            "tasks": {
+                "33": {
+                    "text": "Crouton",
+                    "status": "todo",
+                    "todo_days": 0,
+                    "completed_at": null,
+                    "last_active_date": "2026-11-14T21:04:15.633498"
+                },
+                "34": {
+                    "text": "Caprice",
+                    "status": "todo",
+                    "todo_days": 0,
+                    "completed_at": null,
+                    "last_active_date": "2026-11-14T21:04:22.360533"
+                },
+                "35": {
+                    "text": "Zampon",
+                    "status": "todo",
+                    "todo_days": 0,
+                    "completed_at": null,
+                    "last_active_date": "2026-11-14T21:04:25.816255"
+                }
+            },
+            "task_order": [
+                "35",
+                "34",
+                "33"
+            ]
         }
     },
     "next_page_id": 6,
