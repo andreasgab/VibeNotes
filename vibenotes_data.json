@@ -97,7 +97,7 @@
                     "last_active_date": "2026-11-12T20:40:15.833008"
                 },
                 "22": {
-                    "text": "create confluence page for task, then put review. Create table with prototype fields. ",
+                    "text": "create confluence page for task, then put review. Create table with prototype fields. Fcrm, mcrm: Code, desc, tariff plan ",
                     "status": "bp",
                     "todo_days": 1,
                     "completed_at": null,
