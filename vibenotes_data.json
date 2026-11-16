@@ -148,11 +148,10 @@
                 },
                 "32": {
                     "text": "Coa dataset sent to Genny contains codes not found in inadvance. They could still be found in inarrear. Maybe anti join with that column as well",
-                    "status": "done",
+                    "status": "bp",
                     "todo_days": 1,
-                    "completed_at": "2026-11-16T07:29:40.749759",
-                    "last_active_date": "2026-11-15T17:26:38.398623",
-                    "return_status": "bp"
+                    "completed_at": null,
+                    "last_active_date": "2026-11-16T08:50:03.793809"
                 }
             },
             "task_order": [
