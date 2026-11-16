@@ -142,9 +142,9 @@
                 "31": {
                     "text": "Assess EY effort and organize to talk with Marianna",
                     "status": "todo",
-                    "todo_days": 1,
+                    "todo_days": 2,
                     "completed_at": null,
-                    "last_active_date": "2026-11-15T17:26:38.398623"
+                    "last_active_date": "2026-11-16T22:41:23.652107"
                 },
                 "32": {
                     "text": "Coa dataset sent to Genny contains codes not found in inadvance. They could still be found in inarrear. Maybe anti join with that column as well",
