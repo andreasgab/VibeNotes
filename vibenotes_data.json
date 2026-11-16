@@ -47,9 +47,9 @@
                 "15": {
                     "text": "BRM info of largest TP gap contract",
                     "status": "todo",
-                    "todo_days": 1,
+                    "todo_days": 2,
                     "completed_at": null,
-                    "last_active_date": "2026-11-14T21:02:13.642678"
+                    "last_active_date": "2026-11-16T07:18:38.661484"
                 },
                 "16": {
                     "text": "review the asks of EY before the meeting",
@@ -62,9 +62,9 @@
                 "17": {
                     "text": "Speak with mubin and get a relative time frame for how long will it take to detatch from miner",
                     "status": "chapter",
-                    "todo_days": 1,
+                    "todo_days": 2,
                     "completed_at": null,
-                    "last_active_date": "2026-11-14T21:02:28.895452"
+                    "last_active_date": "2026-11-16T07:18:38.661484"
                 },
                 "18": {
                     "text": "send email to Eleni Alexandra",
@@ -77,9 +77,9 @@
                 "19": {
                     "text": "Control 235 non eligible s15 pobs, from det",
                     "status": "todo",
-                    "todo_days": 1,
+                    "todo_days": 2,
                     "completed_at": null,
-                    "last_active_date": "2026-11-14T21:02:13.642678"
+                    "last_active_date": "2026-11-16T07:18:38.661484"
                 },
                 "20": {
                     "text": "ibro fix m13 table error",
@@ -99,23 +99,23 @@
                 "22": {
                     "text": "create confluence page for task, then put review. Create table with prototype fields. Fcrm, mcrm: Code, desc, tariff plan, discounts, bill codes",
                     "status": "bp",
-                    "todo_days": 1,
+                    "todo_days": 2,
                     "completed_at": null,
-                    "last_active_date": "2026-11-14T21:03:07.292986"
+                    "last_active_date": "2026-11-16T07:18:38.661484"
                 },
                 "24": {
                     "text": "Create confluence page for ibro task, then put review",
                     "status": "bp",
-                    "todo_days": 1,
+                    "todo_days": 2,
                     "completed_at": null,
-                    "last_active_date": "2026-11-14T21:03:04.936948"
+                    "last_active_date": "2026-11-16T07:18:38.661484"
                 },
                 "25": {
                     "text": "Work on chan econ totals + a dataset",
                     "status": "bp",
-                    "todo_days": 1,
+                    "todo_days": 2,
                     "completed_at": null,
-                    "last_active_date": "2026-11-14T21:03:01.995622"
+                    "last_active_date": "2026-11-16T07:18:38.661484"
                 },
                 "26": {
                     "text": "Send email with dataset to Genny + Kafetzis",
@@ -128,16 +128,16 @@
                 "29": {
                     "text": "Reminder email to Citrix",
                     "status": "chapter",
-                    "todo_days": 1,
+                    "todo_days": 2,
                     "completed_at": null,
-                    "last_active_date": "2026-11-14T21:02:13.642678"
+                    "last_active_date": "2026-11-16T07:18:38.661484"
                 },
                 "30": {
                     "text": "Coupons report. Find link between S15 and BAs of file",
                     "status": "todo",
-                    "todo_days": 1,
+                    "todo_days": 2,
                     "completed_at": null,
-                    "last_active_date": "2026-11-14T21:02:13.642678"
+                    "last_active_date": "2026-11-16T07:18:38.661484"
                 },
                 "31": {
                     "text": "Assess EY effort and organize to talk with Marianna",
@@ -186,23 +186,23 @@
                 "33": {
                     "text": "Crouton",
                     "status": "todo",
-                    "todo_days": 0,
+                    "todo_days": 1,
                     "completed_at": null,
-                    "last_active_date": "2026-11-14T21:04:15.633498"
+                    "last_active_date": "2026-11-16T07:18:38.661484"
                 },
                 "34": {
                     "text": "Caprice",
                     "status": "todo",
-                    "todo_days": 0,
+                    "todo_days": 1,
                     "completed_at": null,
-                    "last_active_date": "2026-11-14T21:04:22.360533"
+                    "last_active_date": "2026-11-16T07:18:38.661484"
                 },
                 "35": {
                     "text": "Zampon",
                     "status": "todo",
-                    "todo_days": 0,
+                    "todo_days": 1,
                     "completed_at": null,
-                    "last_active_date": "2026-11-14T21:04:25.816255"
+                    "last_active_date": "2026-11-16T07:18:38.661484"
                 }
             },
             "task_order": [
