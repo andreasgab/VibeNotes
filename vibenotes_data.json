@@ -163,9 +163,17 @@
                     "completed_at": "2026-11-17T14:38:28.462364",
                     "last_active_date": "2026-11-17T12:00:40.690335",
                     "return_status": "chapter"
+                },
+                "41": {
+                    "text": "Speak with Victor and a line on historical records of the reports that are currently in the bi report folder and maybe decide that we will keep the last 6 months",
+                    "status": "chapter",
+                    "todo_days": 0,
+                    "completed_at": null,
+                    "last_active_date": "2026-11-17T15:49:44.020654"
                 }
             },
             "task_order": [
+                "41",
                 "40",
                 "32",
                 "31",
