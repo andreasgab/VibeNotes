@@ -47,9 +47,9 @@
                 "15": {
                     "text": "BRM info of largest TP gap contract",
                     "status": "todo",
-                    "todo_days": 2,
+                    "todo_days": 3,
                     "completed_at": null,
-                    "last_active_date": "2026-11-16T07:18:38.661484"
+                    "last_active_date": "2026-11-17T11:59:41.084704"
                 },
                 "16": {
                     "text": "review the asks of EY before the meeting",
@@ -62,9 +62,9 @@
                 "17": {
                     "text": "Speak with mubin and get a relative time frame for how long will it take to detatch from miner",
                     "status": "chapter",
-                    "todo_days": 2,
+                    "todo_days": 3,
                     "completed_at": null,
-                    "last_active_date": "2026-11-16T07:18:38.661484"
+                    "last_active_date": "2026-11-17T11:59:41.084704"
                 },
                 "18": {
                     "text": "send email to Eleni Alexandra",
@@ -77,9 +77,9 @@
                 "19": {
                     "text": "Control 235 non eligible s15 pobs, from det",
                     "status": "todo",
-                    "todo_days": 2,
+                    "todo_days": 3,
                     "completed_at": null,
-                    "last_active_date": "2026-11-16T07:18:38.661484"
+                    "last_active_date": "2026-11-17T11:59:41.084704"
                 },
                 "20": {
                     "text": "ibro fix m13 table error",
@@ -99,23 +99,23 @@
                 "22": {
                     "text": "create confluence page for task, then put review. Create table with prototype fields. Fcrm, mcrm: Code, desc, tariff plan, discounts, bill codes",
                     "status": "bp",
-                    "todo_days": 2,
+                    "todo_days": 3,
                     "completed_at": null,
-                    "last_active_date": "2026-11-16T07:18:38.661484"
+                    "last_active_date": "2026-11-17T11:59:41.084704"
                 },
                 "24": {
                     "text": "Create confluence page for ibro task, then put review",
                     "status": "bp",
-                    "todo_days": 2,
+                    "todo_days": 3,
                     "completed_at": null,
-                    "last_active_date": "2026-11-16T07:18:38.661484"
+                    "last_active_date": "2026-11-17T11:59:41.084704"
                 },
                 "25": {
                     "text": "Work on chan econ totals + a dataset",
                     "status": "bp",
-                    "todo_days": 2,
+                    "todo_days": 3,
                     "completed_at": null,
-                    "last_active_date": "2026-11-16T07:18:38.661484"
+                    "last_active_date": "2026-11-17T11:59:41.084704"
                 },
                 "26": {
                     "text": "Send email with dataset to Genny + Kafetzis",
@@ -128,16 +128,16 @@
                 "29": {
                     "text": "Reminder email to Citrix",
                     "status": "chapter",
-                    "todo_days": 2,
+                    "todo_days": 3,
                     "completed_at": null,
-                    "last_active_date": "2026-11-16T07:18:38.661484"
+                    "last_active_date": "2026-11-17T11:59:41.084704"
                 },
                 "30": {
                     "text": "Coupons report. Find link between S15 and BAs of file",
                     "status": "todo",
-                    "todo_days": 2,
+                    "todo_days": 3,
                     "completed_at": null,
-                    "last_active_date": "2026-11-16T07:18:38.661484"
+                    "last_active_date": "2026-11-17T11:59:41.084704"
                 },
                 "31": {
                     "text": "Assess EY effort and organize to talk with Marianna",
@@ -149,9 +149,9 @@
                 "32": {
                     "text": "Coa dataset sent to Genny contains codes not found in inadvance. They could still be found in inarrear. Maybe anti join with that column as well",
                     "status": "bp",
-                    "todo_days": 1,
+                    "todo_days": 2,
                     "completed_at": null,
-                    "last_active_date": "2026-11-16T08:50:03.793809"
+                    "last_active_date": "2026-11-17T11:59:41.084704"
                 }
             },
             "task_order": [
@@ -186,51 +186,51 @@
                 "33": {
                     "text": "Crouton",
                     "status": "todo",
-                    "todo_days": 1,
+                    "todo_days": 2,
                     "completed_at": null,
-                    "last_active_date": "2026-11-16T07:18:38.661484"
+                    "last_active_date": "2026-11-17T11:59:41.084704"
                 },
                 "34": {
                     "text": "Caprice",
                     "status": "todo",
-                    "todo_days": 1,
+                    "todo_days": 2,
                     "completed_at": null,
-                    "last_active_date": "2026-11-16T07:18:38.661484"
+                    "last_active_date": "2026-11-17T11:59:41.084704"
                 },
                 "35": {
                     "text": "Zampon",
                     "status": "todo",
-                    "todo_days": 1,
+                    "todo_days": 2,
                     "completed_at": null,
-                    "last_active_date": "2026-11-16T07:18:38.661484"
+                    "last_active_date": "2026-11-17T11:59:41.084704"
                 },
                 "36": {
                     "text": "Ksiroi karpi",
                     "status": "todo",
-                    "todo_days": 0,
+                    "todo_days": 1,
                     "completed_at": null,
-                    "last_active_date": "2026-11-16T08:54:02.214049"
+                    "last_active_date": "2026-11-17T11:59:41.084704"
                 },
                 "37": {
                     "text": "Odontokrema",
                     "status": "todo",
-                    "todo_days": 0,
+                    "todo_days": 1,
                     "completed_at": null,
-                    "last_active_date": "2026-11-16T08:54:07.781860"
+                    "last_active_date": "2026-11-17T11:59:41.084704"
                 },
                 "38": {
                     "text": "\u03a0\u03ac\u03c4\u03bf\u03b9",
                     "status": "todo",
-                    "todo_days": 0,
+                    "todo_days": 1,
                     "completed_at": null,
-                    "last_active_date": "2026-11-16T10:54:40.196936"
+                    "last_active_date": "2026-11-17T11:59:41.084704"
                 },
                 "39": {
                     "text": "\u03a3\u03bf\u03c5\u03c1\u03c9\u03c4\u03ae\u03c1\u03b9 \u03c4\u03c3\u03ac\u03b9",
                     "status": "todo",
-                    "todo_days": 0,
+                    "todo_days": 1,
                     "completed_at": null,
-                    "last_active_date": "2026-11-16T10:55:15.166524"
+                    "last_active_date": "2026-11-17T11:59:41.084704"
                 }
             },
             "task_order": [
