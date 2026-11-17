@@ -61,10 +61,11 @@
                 },
                 "17": {
                     "text": "Speak with mubin and get a relative time frame for how long will it take to detatch from miner",
-                    "status": "chapter",
+                    "status": "done",
                     "todo_days": 3,
-                    "completed_at": null,
-                    "last_active_date": "2026-11-17T11:59:41.084704"
+                    "completed_at": "2026-11-17T13:58:47.756646",
+                    "last_active_date": "2026-11-17T11:59:41.084704",
+                    "return_status": "chapter"
                 },
                 "18": {
                     "text": "send email to Eleni Alexandra",
@@ -148,10 +149,11 @@
                 },
                 "32": {
                     "text": "Coa dataset sent to Genny contains codes not found in inadvance. They could still be found in inarrear. Maybe anti join with that column as well",
-                    "status": "bp",
+                    "status": "done",
                     "todo_days": 2,
-                    "completed_at": null,
-                    "last_active_date": "2026-11-17T11:59:41.084704"
+                    "completed_at": "2026-11-17T13:59:04.143602",
+                    "last_active_date": "2026-11-17T11:59:41.084704",
+                    "return_status": "bp"
                 },
                 "40": {
                     "text": "Setup call with Citrix team, and all of analysts, to discuss the need for our profile to be upgraded so that then the vois members can have the same as us",
