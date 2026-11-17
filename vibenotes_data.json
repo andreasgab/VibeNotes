@@ -128,10 +128,11 @@
                 },
                 "29": {
                     "text": "Reminder email to Citrix",
-                    "status": "chapter",
+                    "status": "done",
                     "todo_days": 3,
-                    "completed_at": null,
-                    "last_active_date": "2026-11-17T11:59:41.084704"
+                    "completed_at": "2026-11-17T14:38:30.813921",
+                    "last_active_date": "2026-11-17T11:59:41.084704",
+                    "return_status": "chapter"
                 },
                 "30": {
                     "text": "Coupons report. Find link between S15 and BAs of file",
@@ -157,10 +158,11 @@
                 },
                 "40": {
                     "text": "Setup call with Citrix team, and all of analysts, to discuss the need for our profile to be upgraded so that then the vois members can have the same as us",
-                    "status": "chapter",
+                    "status": "done",
                     "todo_days": 0,
-                    "completed_at": null,
-                    "last_active_date": "2026-11-17T12:00:40.690335"
+                    "completed_at": "2026-11-17T14:38:28.462364",
+                    "last_active_date": "2026-11-17T12:00:40.690335",
+                    "return_status": "chapter"
                 }
             },
             "task_order": [
