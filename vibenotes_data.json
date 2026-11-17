@@ -152,9 +152,17 @@
                     "todo_days": 2,
                     "completed_at": null,
                     "last_active_date": "2026-11-17T11:59:41.084704"
+                },
+                "40": {
+                    "text": "Setup call with Citrix team, and all of analysts, to discuss the need for our profile to be upgraded so that then the vois members can have the same as us",
+                    "status": "chapter",
+                    "todo_days": 0,
+                    "completed_at": null,
+                    "last_active_date": "2026-11-17T12:00:40.690335"
                 }
             },
             "task_order": [
+                "40",
                 "32",
                 "31",
                 "30",
