@@ -236,95 +236,48 @@
                 }
             ]
         },
-        "5": {
-            "id": 5,
-            "name": "SM",
-            "is_expiring": false,
-            "created_at": "2026-11-14T21:03:33.106105",
-            "tasks": {
-                "33": {
-                    "text": "Crouton",
-                    "status": "todo",
-                    "todo_days": 3,
-                    "completed_at": null,
-                    "last_active_date": "2026-11-18T15:58:43.590177"
-                },
-                "34": {
-                    "text": "Caprice",
-                    "status": "todo",
-                    "todo_days": 3,
-                    "completed_at": null,
-                    "last_active_date": "2026-11-18T15:58:43.590177"
-                },
-                "35": {
-                    "text": "Zampon",
-                    "status": "todo",
-                    "todo_days": 3,
-                    "completed_at": null,
-                    "last_active_date": "2026-11-18T15:58:43.590177"
-                },
-                "36": {
-                    "text": "Ksiroi karpi",
-                    "status": "todo",
-                    "todo_days": 2,
-                    "completed_at": null,
-                    "last_active_date": "2026-11-18T15:58:43.590177"
-                },
-                "37": {
-                    "text": "Odontokrema",
-                    "status": "todo",
-                    "todo_days": 2,
-                    "completed_at": null,
-                    "last_active_date": "2026-11-18T15:58:43.590177"
-                },
-                "38": {
-                    "text": "\u03a0\u03ac\u03c4\u03bf\u03b9",
-                    "status": "todo",
-                    "todo_days": 2,
-                    "completed_at": null,
-                    "last_active_date": "2026-11-18T15:58:43.590177"
-                },
-                "39": {
-                    "text": "\u03a3\u03bf\u03c5\u03c1\u03c9\u03c4\u03ae\u03c1\u03b9 \u03c4\u03c3\u03ac\u03b9",
-                    "status": "todo",
-                    "todo_days": 2,
-                    "completed_at": null,
-                    "last_active_date": "2026-11-18T15:58:43.590177"
-                }
-            },
-            "task_order": [
-                "39",
-                "38",
-                "37",
-                "36",
-                "35",
-                "34",
-                "33"
-            ],
+        "6": {
+            "id": 6,
+            "name": "supermarket",
+            "is_expiring": true,
+            "created_at": "2026-11-18T19:20:34.153411",
             "sections": [
                 {
                     "key": "todo",
                     "title": "To-Do",
                     "hidden": false
-                },
-                {
-                    "key": "bp",
-                    "title": "Business Performance",
-                    "hidden": false
-                },
-                {
-                    "key": "chapter",
-                    "title": "Chapter",
-                    "hidden": false
-                },
-                {
-                    "key": "other",
-                    "title": "Other",
-                    "hidden": false
                 }
+            ],
+            "tasks": {
+                "44": {
+                    "text": "\u03a3\u03bf\u03c5\u03c1\u03c9\u03c4\u03ae\u03c1\u03b9 \u03c4\u03c3\u03ac\u03b9",
+                    "status": "todo",
+                    "todo_days": 0,
+                    "completed_at": null,
+                    "last_active_date": "2026-11-18T19:20:49.282251"
+                },
+                "45": {
+                    "text": "\u039e\u03b7\u03c1\u03bf\u03af \u03ba\u03b1\u03c1\u03c0\u03bf\u03b9",
+                    "status": "todo",
+                    "todo_days": 0,
+                    "completed_at": null,
+                    "last_active_date": "2026-11-18T19:21:02.673252"
+                },
+                "46": {
+                    "text": "\u039a\u03c1\u03bf\u03cd\u03c4\u03bf\u03bd",
+                    "status": "todo",
+                    "todo_days": 0,
+                    "completed_at": null,
+                    "last_active_date": "2026-11-18T19:21:13.668372"
+                }
+            },
+            "task_order": [
+                "46",
+                "45",
+                "44"
             ]
         }
     },
-    "next_page_id": 6,
+    "next_page_id": 7,
     "next_task_id": 30
 }
