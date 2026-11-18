@@ -47,9 +47,9 @@
                 "15": {
                     "text": "BRM info of largest TP gap contract",
                     "status": "todo",
-                    "todo_days": 3,
+                    "todo_days": 4,
                     "completed_at": null,
-                    "last_active_date": "2026-11-17T11:59:41.084704"
+                    "last_active_date": "2026-11-18T15:58:43.590177"
                 },
                 "16": {
                     "text": "review the asks of EY before the meeting",
@@ -78,9 +78,9 @@
                 "19": {
                     "text": "Control 235 non eligible s15 pobs, from det",
                     "status": "todo",
-                    "todo_days": 3,
+                    "todo_days": 4,
                     "completed_at": null,
-                    "last_active_date": "2026-11-17T11:59:41.084704"
+                    "last_active_date": "2026-11-18T15:58:43.590177"
                 },
                 "20": {
                     "text": "ibro fix m13 table error",
@@ -100,23 +100,23 @@
                 "22": {
                     "text": "create confluence page for task, then put review. Create table with prototype fields. Fcrm, mcrm: Code, desc, tariff plan, discounts, bill codes",
                     "status": "bp",
-                    "todo_days": 3,
+                    "todo_days": 4,
                     "completed_at": null,
-                    "last_active_date": "2026-11-17T11:59:41.084704"
+                    "last_active_date": "2026-11-18T15:58:43.590177"
                 },
                 "24": {
                     "text": "Create confluence page for ibro task, then put review",
                     "status": "bp",
-                    "todo_days": 3,
+                    "todo_days": 4,
                     "completed_at": null,
-                    "last_active_date": "2026-11-17T11:59:41.084704"
+                    "last_active_date": "2026-11-18T15:58:43.590177"
                 },
                 "25": {
-                    "text": "Work on chan econ totals + a dataset",
+                    "text": "Work on chan econ totals",
                     "status": "bp",
-                    "todo_days": 3,
+                    "todo_days": 4,
                     "completed_at": null,
-                    "last_active_date": "2026-11-17T11:59:41.084704"
+                    "last_active_date": "2026-11-18T15:58:43.590177"
                 },
                 "26": {
                     "text": "Send email with dataset to Genny + Kafetzis",
@@ -137,9 +137,9 @@
                 "30": {
                     "text": "Coupons report. Find link between S15 and BAs of file",
                     "status": "todo",
-                    "todo_days": 3,
+                    "todo_days": 4,
                     "completed_at": null,
-                    "last_active_date": "2026-11-17T11:59:41.084704"
+                    "last_active_date": "2026-11-18T15:58:43.590177"
                 },
                 "31": {
                     "text": "Assess EY effort and organize to talk with Marianna",
@@ -167,9 +167,9 @@
                 "41": {
                     "text": "Speak with Victor and align on historical records of the reports that are currently in the bi report folder and maybe decide that we will keep the last 6 months",
                     "status": "chapter",
-                    "todo_days": 0,
+                    "todo_days": 1,
                     "completed_at": null,
-                    "last_active_date": "2026-11-17T15:49:44.020654"
+                    "last_active_date": "2026-11-18T15:58:43.590177"
                 }
             },
             "task_order": [
@@ -206,51 +206,51 @@
                 "33": {
                     "text": "Crouton",
                     "status": "todo",
-                    "todo_days": 2,
+                    "todo_days": 3,
                     "completed_at": null,
-                    "last_active_date": "2026-11-17T11:59:41.084704"
+                    "last_active_date": "2026-11-18T15:58:43.590177"
                 },
                 "34": {
                     "text": "Caprice",
                     "status": "todo",
-                    "todo_days": 2,
+                    "todo_days": 3,
                     "completed_at": null,
-                    "last_active_date": "2026-11-17T11:59:41.084704"
+                    "last_active_date": "2026-11-18T15:58:43.590177"
                 },
                 "35": {
                     "text": "Zampon",
                     "status": "todo",
-                    "todo_days": 2,
+                    "todo_days": 3,
                     "completed_at": null,
-                    "last_active_date": "2026-11-17T11:59:41.084704"
+                    "last_active_date": "2026-11-18T15:58:43.590177"
                 },
                 "36": {
                     "text": "Ksiroi karpi",
                     "status": "todo",
-                    "todo_days": 1,
+                    "todo_days": 2,
                     "completed_at": null,
-                    "last_active_date": "2026-11-17T11:59:41.084704"
+                    "last_active_date": "2026-11-18T15:58:43.590177"
                 },
                 "37": {
                     "text": "Odontokrema",
                     "status": "todo",
-                    "todo_days": 1,
+                    "todo_days": 2,
                     "completed_at": null,
-                    "last_active_date": "2026-11-17T11:59:41.084704"
+                    "last_active_date": "2026-11-18T15:58:43.590177"
                 },
                 "38": {
                     "text": "\u03a0\u03ac\u03c4\u03bf\u03b9",
                     "status": "todo",
-                    "todo_days": 1,
+                    "todo_days": 2,
                     "completed_at": null,
-                    "last_active_date": "2026-11-17T11:59:41.084704"
+                    "last_active_date": "2026-11-18T15:58:43.590177"
                 },
                 "39": {
                     "text": "\u03a3\u03bf\u03c5\u03c1\u03c9\u03c4\u03ae\u03c1\u03b9 \u03c4\u03c3\u03ac\u03b9",
                     "status": "todo",
-                    "todo_days": 1,
+                    "todo_days": 2,
                     "completed_at": null,
-                    "last_active_date": "2026-11-17T11:59:41.084704"
+                    "last_active_date": "2026-11-18T15:58:43.590177"
                 }
             },
             "task_order": [
