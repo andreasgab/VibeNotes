@@ -212,6 +212,28 @@
                 "11",
                 "7",
                 "8"
+            ],
+            "sections": [
+                {
+                    "key": "todo",
+                    "title": "To-Do",
+                    "hidden": false
+                },
+                {
+                    "key": "bp",
+                    "title": "Business Performance",
+                    "hidden": false
+                },
+                {
+                    "key": "chapter",
+                    "title": "Chapter",
+                    "hidden": false
+                },
+                {
+                    "key": "other",
+                    "title": "Other",
+                    "hidden": false
+                }
             ]
         },
         "5": {
@@ -278,6 +300,28 @@
                 "35",
                 "34",
                 "33"
+            ],
+            "sections": [
+                {
+                    "key": "todo",
+                    "title": "To-Do",
+                    "hidden": false
+                },
+                {
+                    "key": "bp",
+                    "title": "Business Performance",
+                    "hidden": false
+                },
+                {
+                    "key": "chapter",
+                    "title": "Chapter",
+                    "hidden": false
+                },
+                {
+                    "key": "other",
+                    "title": "Other",
+                    "hidden": false
+                }
             ]
         }
     },
