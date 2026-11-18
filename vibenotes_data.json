@@ -170,9 +170,26 @@
                     "todo_days": 1,
                     "completed_at": null,
                     "last_active_date": "2026-11-18T15:58:43.590177"
+                },
+                "42": {
+                    "text": "Work on chan econ datasets (postpay vmb, beyond, connectivity)",
+                    "status": "done",
+                    "todo_days": 0,
+                    "completed_at": "2026-11-18T16:00:52.295403",
+                    "last_active_date": "2026-11-18T16:00:07.429606",
+                    "return_status": "bp"
+                },
+                "43": {
+                    "text": "Speak with Ioannis and put all pending chan econ points under a new task",
+                    "status": "bp",
+                    "todo_days": 0,
+                    "completed_at": null,
+                    "last_active_date": "2026-11-18T16:00:32.223378"
                 }
             },
             "task_order": [
+                "43",
+                "42",
                 "41",
                 "40",
                 "32",
