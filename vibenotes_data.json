@@ -178,17 +178,9 @@
                     "completed_at": "2026-11-18T16:00:52.295403",
                     "last_active_date": "2026-11-18T16:00:07.429606",
                     "return_status": "bp"
-                },
-                "43": {
-                    "text": "Speak with Ioannis and put all pending chan econ points under a new task",
-                    "status": "bp",
-                    "todo_days": 0,
-                    "completed_at": null,
-                    "last_active_date": "2026-11-18T16:00:32.223378"
                 }
             },
             "task_order": [
-                "43",
                 "42",
                 "41",
                 "40",
@@ -215,6 +207,11 @@
             ],
             "sections": [
                 {
+                    "key": "other",
+                    "title": "Other",
+                    "hidden": true
+                },
+                {
                     "key": "todo",
                     "title": "S15",
                     "hidden": false
@@ -227,11 +224,6 @@
                 {
                     "key": "chapter",
                     "title": "Chapter",
-                    "hidden": false
-                },
-                {
-                    "key": "other",
-                    "title": "Other",
                     "hidden": false
                 }
             ]
