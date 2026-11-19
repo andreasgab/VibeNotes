@@ -44,13 +44,6 @@
                     "last_active_date": "2026-11-12T20:39:22.144940",
                     "return_status": "todo"
                 },
-                "15": {
-                    "text": "\u039a\u03ac\u03bd\u03b5 \u03bc\u03bf\u03c5 \u03c4\u03bf avg \u03c4\u03bf\u03c5 billed arpu",
-                    "status": "todo",
-                    "todo_days": 5,
-                    "completed_at": null,
-                    "last_active_date": "2026-11-19T20:32:56.886979"
-                },
                 "16": {
                     "text": "review the asks of EY before the meeting",
                     "status": "done",
@@ -113,10 +106,12 @@
                 },
                 "25": {
                     "text": "Work on chan econ totals",
-                    "status": "bp",
+                    "status": "done",
                     "todo_days": 5,
-                    "completed_at": null,
-                    "last_active_date": "2026-11-19T20:32:56.886979"
+                    "completed_at": "2026-11-19T20:34:42.138727",
+                    "last_active_date": "2026-11-19T20:32:56.886979",
+                    "return_status": "bp",
+                    "return_title": "Business Performance"
                 },
                 "26": {
                     "text": "Send email with dataset to Genny + Kafetzis",
@@ -178,9 +173,17 @@
                     "completed_at": "2026-11-18T16:00:52.295403",
                     "last_active_date": "2026-11-18T16:00:07.429606",
                     "return_status": "bp"
+                },
+                "47": {
+                    "text": "S15 Change request: \u0397 \u039c\u03b1\u03c1\u03b9\u03ac\u03bd\u03bd\u03b1 \u03bd\u03b1 \u03ba\u03ac\u03bd\u03b5\u03b9 submit \u03c3\u03c4\u03bf demand \u03cc\u03c4\u03b9 \u03b8\u03ad\u03bb\u03b5\u03b9 \u03bd\u03b1 \u03b1\u03bb\u03bb\u03ac\u03be\u03b5\u03b9 \u03c4\u03bf treatment, \u03c4\u03cc\u03c4\u03b5 \u03b8\u03b1 \u03c4\u03bf \u03c3\u03c5\u03b6\u03b7\u03c4\u03ae\u03c3\u03bf\u03c5\u03bc\u03b5 \u03bc\u03b5 ibm",
+                    "status": "todo",
+                    "todo_days": 0,
+                    "completed_at": null,
+                    "last_active_date": "2026-11-19T20:34:18.300227"
                 }
             },
             "task_order": [
+                "47",
                 "42",
                 "41",
                 "40",
@@ -198,7 +201,6 @@
                 "19",
                 "18",
                 "16",
-                "15",
                 "14",
                 "12",
                 "11",
