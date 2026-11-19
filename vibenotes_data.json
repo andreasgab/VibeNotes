@@ -47,9 +47,9 @@
                 "15": {
                     "text": "\u039a\u03ac\u03bd\u03b5 \u03bc\u03bf\u03c5 \u03c4\u03bf avg \u03c4\u03bf\u03c5 billed arpu",
                     "status": "todo",
-                    "todo_days": 4,
+                    "todo_days": 5,
                     "completed_at": null,
-                    "last_active_date": "2026-11-18T15:58:43.590177"
+                    "last_active_date": "2026-11-19T20:32:56.886979"
                 },
                 "16": {
                     "text": "review the asks of EY before the meeting",
@@ -78,9 +78,9 @@
                 "19": {
                     "text": "Control 235 non eligible s15 pobs, from det",
                     "status": "todo",
-                    "todo_days": 4,
+                    "todo_days": 5,
                     "completed_at": null,
-                    "last_active_date": "2026-11-18T15:58:43.590177"
+                    "last_active_date": "2026-11-19T20:32:56.886979"
                 },
                 "20": {
                     "text": "ibro fix m13 table error",
@@ -100,23 +100,23 @@
                 "22": {
                     "text": "create confluence page for task, then put review. Create table with prototype fields. Fcrm, mcrm: Code, desc, tariff plan, discounts, bill codes",
                     "status": "bp",
-                    "todo_days": 4,
+                    "todo_days": 5,
                     "completed_at": null,
-                    "last_active_date": "2026-11-18T15:58:43.590177"
+                    "last_active_date": "2026-11-19T20:33:15.514401"
                 },
                 "24": {
                     "text": "Create confluence page for ibro task, then put review",
                     "status": "bp",
-                    "todo_days": 4,
+                    "todo_days": 5,
                     "completed_at": null,
-                    "last_active_date": "2026-11-18T15:58:43.590177"
+                    "last_active_date": "2026-11-19T20:32:56.886979"
                 },
                 "25": {
                     "text": "Work on chan econ totals",
                     "status": "bp",
-                    "todo_days": 4,
+                    "todo_days": 5,
                     "completed_at": null,
-                    "last_active_date": "2026-11-18T15:58:43.590177"
+                    "last_active_date": "2026-11-19T20:32:56.886979"
                 },
                 "26": {
                     "text": "Send email with dataset to Genny + Kafetzis",
@@ -137,9 +137,9 @@
                 "30": {
                     "text": "Coupons report. Find link between S15 and BAs of file",
                     "status": "todo",
-                    "todo_days": 4,
+                    "todo_days": 5,
                     "completed_at": null,
-                    "last_active_date": "2026-11-18T15:58:43.590177"
+                    "last_active_date": "2026-11-19T20:32:56.886979"
                 },
                 "31": {
                     "text": "Assess EY effort and organize to talk with Marianna",
@@ -167,9 +167,9 @@
                 "41": {
                     "text": "Speak with Victor and align on historical records of the reports that are currently in the bi report folder and maybe decide that we will keep the last 6 months",
                     "status": "chapter",
-                    "todo_days": 1,
+                    "todo_days": 2,
                     "completed_at": null,
-                    "last_active_date": "2026-11-18T15:58:43.590177"
+                    "last_active_date": "2026-11-19T20:32:56.886979"
                 },
                 "42": {
                     "text": "Work on chan econ datasets (postpay vmb, beyond, connectivity)",
@@ -178,17 +178,9 @@
                     "completed_at": "2026-11-18T16:00:52.295403",
                     "last_active_date": "2026-11-18T16:00:07.429606",
                     "return_status": "bp"
-                },
-                "47": {
-                    "text": "\u0398\u03ad\u03bb\u03c9 triple play \u03b8\u03ad\u03bb\u03c9",
-                    "status": "todo",
-                    "todo_days": 0,
-                    "completed_at": null,
-                    "last_active_date": "2026-11-19T13:14:19.536825"
                 }
             },
             "task_order": [
-                "47",
                 "42",
                 "41",
                 "40",
@@ -252,23 +244,23 @@
                 "44": {
                     "text": "\u03a3\u03bf\u03c5\u03c1\u03c9\u03c4\u03ae\u03c1\u03b9 \u03c4\u03c3\u03ac\u03b9",
                     "status": "todo",
-                    "todo_days": 0,
+                    "todo_days": 1,
                     "completed_at": null,
-                    "last_active_date": "2026-11-18T19:20:49.282251"
+                    "last_active_date": "2026-11-19T20:32:56.886979"
                 },
                 "45": {
                     "text": "\u039e\u03b7\u03c1\u03bf\u03af \u03ba\u03b1\u03c1\u03c0\u03bf\u03b9",
                     "status": "todo",
-                    "todo_days": 0,
+                    "todo_days": 1,
                     "completed_at": null,
-                    "last_active_date": "2026-11-18T19:21:02.673252"
+                    "last_active_date": "2026-11-19T20:32:56.886979"
                 },
                 "46": {
                     "text": "\u039a\u03c1\u03bf\u03cd\u03c4\u03bf\u03bd",
                     "status": "todo",
-                    "todo_days": 0,
+                    "todo_days": 1,
                     "completed_at": null,
-                    "last_active_date": "2026-11-18T19:21:13.668372"
+                    "last_active_date": "2026-11-19T20:32:56.886979"
                 }
             },
             "task_order": [
