@@ -45,7 +45,7 @@
                     "return_status": "todo"
                 },
                 "15": {
-                    "text": "BRM info of largest TP gap contract",
+                    "text": "\u039a\u03ac\u03bd\u03b5 \u03bc\u03bf\u03c5 \u03c4\u03bf avg \u03c4\u03bf\u03c5 billed arpu",
                     "status": "todo",
                     "todo_days": 4,
                     "completed_at": null,
@@ -178,9 +178,17 @@
                     "completed_at": "2026-11-18T16:00:52.295403",
                     "last_active_date": "2026-11-18T16:00:07.429606",
                     "return_status": "bp"
+                },
+                "47": {
+                    "text": "\u0398\u03ad\u03bb\u03c9 triple play \u03b8\u03ad\u03bb\u03c9",
+                    "status": "todo",
+                    "todo_days": 0,
+                    "completed_at": null,
+                    "last_active_date": "2026-11-19T13:14:19.536825"
                 }
             },
             "task_order": [
+                "47",
                 "42",
                 "41",
                 "40",
