@@ -73,7 +73,7 @@
                     "status": "todo",
                     "todo_days": 5,
                     "completed_at": null,
-                    "last_active_date": "2026-11-19T20:32:56.886979"
+                    "last_active_date": "2026-11-20T14:00:04.451785"
                 },
                 "20": {
                     "text": "ibro fix m13 table error",
@@ -139,9 +139,9 @@
                 "31": {
                     "text": "Assess EY effort and organize to talk with Marianna",
                     "status": "todo",
-                    "todo_days": 4,
+                    "todo_days": 5,
                     "completed_at": null,
-                    "last_active_date": "2026-11-19T11:20:36.390945"
+                    "last_active_date": "2026-11-20T13:59:36.845525"
                 },
                 "32": {
                     "text": "Coa dataset sent to Genny contains codes not found in inadvance. They could still be found in inarrear. Maybe anti join with that column as well",
@@ -180,9 +180,19 @@
                     "todo_days": 0,
                     "completed_at": null,
                     "last_active_date": "2026-11-19T20:34:18.300227"
+                },
+                "49": {
+                    "text": "S15 control 243 automation: Ensure quality and send email",
+                    "status": "done",
+                    "todo_days": 0,
+                    "completed_at": "2026-11-20T14:00:13.737453",
+                    "last_active_date": "2026-11-20T13:59:56.339962",
+                    "return_status": "todo",
+                    "return_title": "S15"
                 }
             },
             "task_order": [
+                "49",
                 "47",
                 "42",
                 "41",
