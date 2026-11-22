@@ -189,9 +189,17 @@
                     "last_active_date": "2026-11-20T13:59:56.339962",
                     "return_status": "todo",
                     "return_title": "S15"
+                },
+                "50": {
+                    "text": "Gather proof of what's currently happening in Citrix with vs code and python, find the inc number and show screenshot of past ticket.",
+                    "status": "chapter",
+                    "todo_days": 0,
+                    "completed_at": null,
+                    "last_active_date": "2026-11-22T22:23:34.919595"
                 }
             },
             "task_order": [
+                "50",
                 "49",
                 "47",
                 "42",
