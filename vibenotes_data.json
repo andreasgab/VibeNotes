@@ -191,7 +191,7 @@
                     "return_title": "S15"
                 },
                 "50": {
-                    "text": "Gather proof of what's currently happening in Citrix with vs code and python, find the inc number and show screenshot of past ticket.",
+                    "text": "Gather proof of what's currently happening in Citrix with vs code and python, find the inc number and show screenshot of past ticket. After conversation, have eta for the development setup. Also mention the vois team and the profile changes",
                     "status": "chapter",
                     "todo_days": 0,
                     "completed_at": null,
