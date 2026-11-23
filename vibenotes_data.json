@@ -71,9 +71,9 @@
                 "19": {
                     "text": "Control 235 non eligible s15 pobs, from det",
                     "status": "todo",
-                    "todo_days": 6,
+                    "todo_days": 7,
                     "completed_at": null,
-                    "last_active_date": "2026-11-22T21:09:42.236662"
+                    "last_active_date": "2026-11-23T21:43:04.140859"
                 },
                 "20": {
                     "text": "ibro fix m13 table error",
@@ -93,16 +93,16 @@
                 "22": {
                     "text": "create confluence page for task, then put review. Create table with prototype fields. Fcrm, mcrm: Code, desc, tariff plan, discounts, bill codes",
                     "status": "bp",
-                    "todo_days": 6,
+                    "todo_days": 7,
                     "completed_at": null,
-                    "last_active_date": "2026-11-22T21:09:42.236662"
+                    "last_active_date": "2026-11-23T21:43:04.140859"
                 },
                 "24": {
                     "text": "Create confluence page for ibro task, then put review",
                     "status": "bp",
-                    "todo_days": 6,
+                    "todo_days": 7,
                     "completed_at": null,
-                    "last_active_date": "2026-11-22T21:09:42.236662"
+                    "last_active_date": "2026-11-23T21:43:04.140859"
                 },
                 "25": {
                     "text": "Work on chan econ totals",
@@ -141,9 +141,9 @@
                 "31": {
                     "text": "Assess EY effort and organize to talk with Marianna",
                     "status": "todo",
-                    "todo_days": 6,
+                    "todo_days": 7,
                     "completed_at": null,
-                    "last_active_date": "2026-11-22T21:09:42.236662"
+                    "last_active_date": "2026-11-23T21:43:04.140859"
                 },
                 "32": {
                     "text": "Coa dataset sent to Genny contains codes not found in inadvance. They could still be found in inarrear. Maybe anti join with that column as well",
@@ -164,9 +164,9 @@
                 "41": {
                     "text": "Speak with Victor and align on historical records of the reports that are currently in the bi report folder and maybe decide that we will keep the last 6 months",
                     "status": "chapter",
-                    "todo_days": 3,
+                    "todo_days": 4,
                     "completed_at": null,
-                    "last_active_date": "2026-11-22T21:09:42.236662"
+                    "last_active_date": "2026-11-23T21:43:04.140859"
                 },
                 "42": {
                     "text": "Work on chan econ datasets (postpay vmb, beyond, connectivity)",
@@ -179,9 +179,9 @@
                 "47": {
                     "text": "S15 Change request: \u0397 \u039c\u03b1\u03c1\u03b9\u03ac\u03bd\u03bd\u03b1 \u03bd\u03b1 \u03ba\u03ac\u03bd\u03b5\u03b9 submit \u03c3\u03c4\u03bf demand \u03cc\u03c4\u03b9 \u03b8\u03ad\u03bb\u03b5\u03b9 \u03bd\u03b1 \u03b1\u03bb\u03bb\u03ac\u03be\u03b5\u03b9 \u03c4\u03bf treatment, \u03c4\u03cc\u03c4\u03b5 \u03b8\u03b1 \u03c4\u03bf \u03c3\u03c5\u03b6\u03b7\u03c4\u03ae\u03c3\u03bf\u03c5\u03bc\u03b5 \u03bc\u03b5 ibm",
                     "status": "todo",
-                    "todo_days": 1,
+                    "todo_days": 2,
                     "completed_at": null,
-                    "last_active_date": "2026-11-22T21:09:42.236662"
+                    "last_active_date": "2026-11-23T21:43:04.140859"
                 },
                 "49": {
                     "text": "S15 control 243 automation: Ensure quality and send email",
@@ -207,9 +207,17 @@
                     "todo_days": 0,
                     "completed_at": null,
                     "last_active_date": "2026-11-23T14:46:08.677319"
+                },
+                "52": {
+                    "text": "Write moms for Citrix meeting:",
+                    "status": "chapter",
+                    "todo_days": 0,
+                    "completed_at": null,
+                    "last_active_date": "2026-11-23T21:43:26.919986"
                 }
             },
             "task_order": [
+                "52",
                 "51",
                 "50",
                 "49",
@@ -276,30 +284,30 @@
                 "44": {
                     "text": "\u03a3\u03bf\u03c5\u03c1\u03c9\u03c4\u03ae\u03c1\u03b9 \u03c4\u03c3\u03ac\u03b9",
                     "status": "todo",
-                    "todo_days": 2,
+                    "todo_days": 3,
                     "completed_at": null,
-                    "last_active_date": "2026-11-22T21:09:42.236662"
+                    "last_active_date": "2026-11-23T21:43:04.140859"
                 },
                 "45": {
                     "text": "\u039e\u03b7\u03c1\u03bf\u03af \u03ba\u03b1\u03c1\u03c0\u03bf\u03b9",
                     "status": "todo",
-                    "todo_days": 2,
+                    "todo_days": 3,
                     "completed_at": null,
-                    "last_active_date": "2026-11-22T21:09:42.236662"
+                    "last_active_date": "2026-11-23T21:43:04.140859"
                 },
                 "46": {
                     "text": "\u039a\u03c1\u03bf\u03cd\u03c4\u03bf\u03bd",
                     "status": "todo",
-                    "todo_days": 2,
+                    "todo_days": 3,
                     "completed_at": null,
-                    "last_active_date": "2026-11-22T21:09:42.236662"
+                    "last_active_date": "2026-11-23T21:43:04.140859"
                 },
                 "48": {
                     "text": "\u03a3\u03bf\u03ba\u03bf\u03bb\u03ac\u03c4\u03b1 \u03b3\u03b9\u03b1 \u0395\u03c1\u03bc\u03b9\u03cc\u03bd\u03b7",
                     "status": "todo",
-                    "todo_days": 1,
+                    "todo_days": 2,
                     "completed_at": null,
-                    "last_active_date": "2026-11-22T21:09:42.236662"
+                    "last_active_date": "2026-11-23T21:43:04.140859"
                 }
             },
             "task_order": [
