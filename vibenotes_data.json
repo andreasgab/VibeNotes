@@ -131,10 +131,12 @@
                 },
                 "30": {
                     "text": "Coupons report. Find link between S15 and BAs of file",
-                    "status": "todo",
+                    "status": "done",
                     "todo_days": 6,
-                    "completed_at": null,
-                    "last_active_date": "2026-11-22T21:09:42.236662"
+                    "completed_at": "2026-11-23T14:45:45.596835",
+                    "last_active_date": "2026-11-22T21:09:42.236662",
+                    "return_status": "todo",
+                    "return_title": "S15"
                 },
                 "31": {
                     "text": "Assess EY effort and organize to talk with Marianna",
@@ -192,13 +194,23 @@
                 },
                 "50": {
                     "text": "Gather proof of what's currently happening in Citrix with vs code and python, find the inc number and show screenshot of past ticket. After conversation, have eta for the development setup. Also mention the vois team and the profile changes",
-                    "status": "chapter",
+                    "status": "done",
+                    "todo_days": 0,
+                    "completed_at": "2026-11-23T14:46:25.088157",
+                    "last_active_date": "2026-11-22T22:23:34.919595",
+                    "return_status": "chapter",
+                    "return_title": "Chapter"
+                },
+                "51": {
+                    "text": "Coupons report. Link between BAs found. Now I have to secure file, and then see their information in S15",
+                    "status": "todo",
                     "todo_days": 0,
                     "completed_at": null,
-                    "last_active_date": "2026-11-22T22:23:34.919595"
+                    "last_active_date": "2026-11-23T14:46:08.677319"
                 }
             },
             "task_order": [
+                "51",
                 "50",
                 "49",
                 "47",
