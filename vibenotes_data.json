@@ -97,13 +97,6 @@
                     "completed_at": null,
                     "last_active_date": "2026-11-23T21:43:04.140859"
                 },
-                "24": {
-                    "text": "Create confluence page for ibro task, then put review",
-                    "status": "bp",
-                    "todo_days": 7,
-                    "completed_at": null,
-                    "last_active_date": "2026-11-23T21:43:04.140859"
-                },
                 "25": {
                     "text": "Work on chan econ totals",
                     "status": "done",
@@ -221,9 +214,17 @@
                     "todo_days": 0,
                     "completed_at": null,
                     "last_active_date": "2026-11-24T08:19:30.571482"
+                },
+                "54": {
+                    "text": "Check with ilias the GLID queries, then decide how to move forward",
+                    "status": "bp",
+                    "todo_days": 0,
+                    "completed_at": null,
+                    "last_active_date": "2026-11-24T13:23:33.016081"
                 }
             },
             "task_order": [
+                "54",
                 "53",
                 "52",
                 "51",
@@ -239,7 +240,6 @@
                 "29",
                 "26",
                 "25",
-                "24",
                 "17",
                 "21",
                 "22",
