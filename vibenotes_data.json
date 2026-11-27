@@ -71,9 +71,9 @@
                 "19": {
                     "text": "Control 235 non eligible s15 pobs, from det",
                     "status": "todo",
-                    "todo_days": 7,
+                    "todo_days": 8,
                     "completed_at": null,
-                    "last_active_date": "2026-11-23T21:43:04.140859"
+                    "last_active_date": "2026-11-27T12:40:32.338650"
                 },
                 "20": {
                     "text": "ibro fix m13 table error",
@@ -93,9 +93,9 @@
                 "22": {
                     "text": "create confluence page for task, then put review. Create table with prototype fields. Fcrm, mcrm: Code, desc, tariff plan, discounts, bill codes",
                     "status": "bp",
-                    "todo_days": 7,
+                    "todo_days": 8,
                     "completed_at": null,
-                    "last_active_date": "2026-11-23T21:43:04.140859"
+                    "last_active_date": "2026-11-27T12:40:32.338650"
                 },
                 "25": {
                     "text": "Work on chan econ totals",
@@ -134,9 +134,9 @@
                 "31": {
                     "text": "Assess EY effort and organize to talk with Marianna",
                     "status": "todo",
-                    "todo_days": 7,
+                    "todo_days": 8,
                     "completed_at": null,
-                    "last_active_date": "2026-11-23T21:43:04.140859"
+                    "last_active_date": "2026-11-27T12:40:32.338650"
                 },
                 "32": {
                     "text": "Coa dataset sent to Genny contains codes not found in inadvance. They could still be found in inarrear. Maybe anti join with that column as well",
@@ -157,9 +157,9 @@
                 "41": {
                     "text": "Speak with Victor and align on historical records of the reports that are currently in the bi report folder and maybe decide that we will keep the last 6 months",
                     "status": "chapter",
-                    "todo_days": 4,
+                    "todo_days": 5,
                     "completed_at": null,
-                    "last_active_date": "2026-11-23T21:43:04.140859"
+                    "last_active_date": "2026-11-27T12:40:32.338650"
                 },
                 "42": {
                     "text": "Work on chan econ datasets (postpay vmb, beyond, connectivity)",
@@ -172,9 +172,9 @@
                 "47": {
                     "text": "S15 Change request: \u0397 \u039c\u03b1\u03c1\u03b9\u03ac\u03bd\u03bd\u03b1 \u03bd\u03b1 \u03ba\u03ac\u03bd\u03b5\u03b9 submit \u03c3\u03c4\u03bf demand \u03cc\u03c4\u03b9 \u03b8\u03ad\u03bb\u03b5\u03b9 \u03bd\u03b1 \u03b1\u03bb\u03bb\u03ac\u03be\u03b5\u03b9 \u03c4\u03bf treatment, \u03c4\u03cc\u03c4\u03b5 \u03b8\u03b1 \u03c4\u03bf \u03c3\u03c5\u03b6\u03b7\u03c4\u03ae\u03c3\u03bf\u03c5\u03bc\u03b5 \u03bc\u03b5 ibm",
                     "status": "todo",
-                    "todo_days": 2,
+                    "todo_days": 3,
                     "completed_at": null,
-                    "last_active_date": "2026-11-23T21:43:04.140859"
+                    "last_active_date": "2026-11-27T12:40:32.338650"
                 },
                 "49": {
                     "text": "S15 control 243 automation: Ensure quality and send email",
@@ -197,30 +197,30 @@
                 "51": {
                     "text": "Coupons report. Link between BAs found. Now I have to secure file, and then see their information in S15",
                     "status": "todo",
-                    "todo_days": 0,
+                    "todo_days": 1,
                     "completed_at": null,
-                    "last_active_date": "2026-11-23T14:46:08.677319"
+                    "last_active_date": "2026-11-27T12:40:32.338650"
                 },
                 "52": {
                     "text": "Write moms for Citrix meeting: 1. DNA will speak with cvms. \n2. DNA will assess the number of members\n3. DNA will go to security and make sure the installations are permitted ",
                     "status": "chapter",
-                    "todo_days": 0,
+                    "todo_days": 1,
                     "completed_at": null,
-                    "last_active_date": "2026-11-23T21:43:26.919986"
+                    "last_active_date": "2026-11-27T12:40:32.338650"
                 },
                 "53": {
                     "text": "Gianna give answer for the 5th ticket of customer base",
                     "status": "bp",
-                    "todo_days": 0,
+                    "todo_days": 1,
                     "completed_at": null,
-                    "last_active_date": "2026-11-24T08:19:30.571482"
+                    "last_active_date": "2026-11-27T12:40:32.338650"
                 },
                 "54": {
                     "text": "Check with ilias the GLID queries, then decide how to move forward",
                     "status": "bp",
-                    "todo_days": 0,
+                    "todo_days": 1,
                     "completed_at": null,
-                    "last_active_date": "2026-11-24T13:23:33.016081"
+                    "last_active_date": "2026-11-27T12:40:32.338650"
                 }
             },
             "task_order": [
@@ -292,30 +292,30 @@
                 "44": {
                     "text": "\u03a3\u03bf\u03c5\u03c1\u03c9\u03c4\u03ae\u03c1\u03b9 \u03c4\u03c3\u03ac\u03b9",
                     "status": "todo",
-                    "todo_days": 3,
+                    "todo_days": 4,
                     "completed_at": null,
-                    "last_active_date": "2026-11-23T21:43:04.140859"
+                    "last_active_date": "2026-11-27T12:40:32.338650"
                 },
                 "45": {
                     "text": "\u039e\u03b7\u03c1\u03bf\u03af \u03ba\u03b1\u03c1\u03c0\u03bf\u03b9",
                     "status": "todo",
-                    "todo_days": 3,
+                    "todo_days": 4,
                     "completed_at": null,
-                    "last_active_date": "2026-11-23T21:43:04.140859"
+                    "last_active_date": "2026-11-27T12:40:32.338650"
                 },
                 "46": {
                     "text": "\u039a\u03c1\u03bf\u03cd\u03c4\u03bf\u03bd",
                     "status": "todo",
-                    "todo_days": 3,
+                    "todo_days": 4,
                     "completed_at": null,
-                    "last_active_date": "2026-11-23T21:43:04.140859"
+                    "last_active_date": "2026-11-27T12:40:32.338650"
                 },
                 "48": {
                     "text": "\u03a3\u03bf\u03ba\u03bf\u03bb\u03ac\u03c4\u03b1 \u03b3\u03b9\u03b1 \u0395\u03c1\u03bc\u03b9\u03cc\u03bd\u03b7",
                     "status": "todo",
-                    "todo_days": 2,
+                    "todo_days": 3,
                     "completed_at": null,
-                    "last_active_date": "2026-11-23T21:43:04.140859"
+                    "last_active_date": "2026-11-27T12:40:32.338650"
                 }
             },
             "task_order": [
