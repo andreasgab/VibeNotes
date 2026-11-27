@@ -242,9 +242,17 @@
                     "todo_days": 0,
                     "completed_at": null,
                     "last_active_date": "2026-11-27T14:28:45.195698"
+                },
+                "58": {
+                    "text": "Monday mega list:",
+                    "status": "other",
+                    "todo_days": 0,
+                    "completed_at": null,
+                    "last_active_date": "2026-11-27T16:04:02.430717"
                 }
             },
             "task_order": [
+                "58",
                 "57",
                 "56",
                 "55",
@@ -281,7 +289,7 @@
                 {
                     "key": "other",
                     "title": "Other",
-                    "hidden": true
+                    "hidden": false
                 },
                 {
                     "key": "todo",
