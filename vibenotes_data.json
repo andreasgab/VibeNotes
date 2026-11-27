@@ -235,9 +235,17 @@
                     "todo_days": 0,
                     "completed_at": null,
                     "last_active_date": "2026-11-27T14:26:37.032629"
+                },
+                "57": {
+                    "text": "Update confluence page, put all the queries in it. Make sure nothing is forgotten. Check them out with the guys before the review. Say that one more task will be the final Day checks after Ioannis sign off",
+                    "status": "bp",
+                    "todo_days": 0,
+                    "completed_at": null,
+                    "last_active_date": "2026-11-27T14:28:45.195698"
                 }
             },
             "task_order": [
+                "57",
                 "56",
                 "55",
                 "54",
