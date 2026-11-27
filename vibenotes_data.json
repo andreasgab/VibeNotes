@@ -221,9 +221,25 @@
                     "todo_days": 1,
                     "completed_at": null,
                     "last_active_date": "2026-11-27T12:40:32.338650"
+                },
+                "55": {
+                    "text": "Write instructions on how to use GitHub desktop within Citrix. (Create shortcut of folder to find through Jupyter, then the commands in vs code terminal for usr name, email, all put in guide)",
+                    "status": "chapter",
+                    "todo_days": 0,
+                    "completed_at": null,
+                    "last_active_date": "2026-11-27T14:26:18.575831"
+                },
+                "56": {
+                    "text": "Send control 243 as Marianna requested",
+                    "status": "todo",
+                    "todo_days": 0,
+                    "completed_at": null,
+                    "last_active_date": "2026-11-27T14:26:37.032629"
                 }
             },
             "task_order": [
+                "56",
+                "55",
                 "54",
                 "53",
                 "52",
